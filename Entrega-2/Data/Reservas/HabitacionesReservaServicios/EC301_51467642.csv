@@ -1,0 +1,5 @@
+documento,id,tipo,balcon,vista,cocina
+51467642,E.C.301,suite,true,true,false
+nombre,precio,descripcion,registro,fecha,pagado
+Restaurante,53.44,Mojito: 3;Hamburguesa: 2;Nachos: 1,habitacion,03/04/2023,true
+Restaurante,27.95,Pizza: 2;Coca-Cola: 3,habitacion,04/04/2023,true

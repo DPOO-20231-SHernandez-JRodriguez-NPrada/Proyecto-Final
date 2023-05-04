@@ -1,0 +1,5 @@
+documento,id,tipo,balcon,vista,cocina
+1000613998,E.CA.109,estandar,false,false,false
+nombre,precio,descripcion,registro,fecha,pagado
+Restaurante,53.44,Mojito: 3;Hamburguesa: 2;Nachos: 1,habitacion,04/01/2023,true
+Restaurante,27.95,Pizza: 2;Coca-Cola: 3,habitacion,05/01/2023,true

@@ -1,0 +1,5 @@
+documento,id,tipo,balcon,vista,cocina
+1101745923,E.C.303,suite,true,true,false
+nombre,precio,descripcion,registro,fecha,pagado
+Restaurante,143.84,Mojito: 8;Hamburguesa: 6;Nachos: 2,habitacion,31/03/2023,false
+Restaurante,53.91,Pizza: 3;Cerveza: 6,habitacion,01/04/2023,false
