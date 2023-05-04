@@ -1,0 +1,5 @@
+nombre,documento,correo,numeroCelular
+Andres Feuillet,1234567890,aFefefe@hotmail.com,3195467890
+nombre,precio,descripcion,registro,fecha,pagado
+Spa,44.99,Una hora el spa,huesped,05/04/2023,true
+Restaurante,7.98,Nachos: 2,huesped,06/04/2023,true

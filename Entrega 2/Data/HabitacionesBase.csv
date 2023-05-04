@@ -1,0 +1,26 @@
+ubicacion,capcidad,capacidadMax,id,tipo,balcon,vista,cocina,capacidadCamas,anio
+Edificio Cancun,4,6,E.C.301,suite,true,true,false,22,2023
+Edificio Cancun,4,6,E.C.302,suite,true,true,false,22,2023
+Edificio Cancun,4,6,E.C.303,suite,true,true,false,22,2023
+Edificio Cancun,5,7,E.C.304,suite,fasle,true,false,221,2023
+Edificio Cancun,5,7,E.C.305,suite,false,false,false,221,2023
+Edificio Cancun,5,7,E.C.306,suite,false,false,false,221,2023
+Edificio Cancun,4,6,E.C.307,suite,true,false,false,22,2023
+Edificio Cancun,4,6,E.C.308,suite,true,false,false,22,2023
+Edificio Cancun,4,6,E.C.309,suite,true,true,false,22,2023
+Edificio Cancun,4,6,E.C.310,suite,true,true,false,22,2023
+Edificio Barcelona,2,3,E.B.501,doble,true,true,false,2,2023
+Edificio Barcelona,2,3,E.B.502,doble,true,true,false,2,2023
+Edificio Barcelona,2,3,E.B.503,doble,true,true,false,2,2023
+Edificio Barcelona,2,3,E.B.504,doble,true,true,false,2,2023
+Edificio Barcelona,2,3,E.B.505,doble,true,true,false,2,2023
+Edificio Cartagena,1,1,E.CA.101,estandar,false,false,true,1,2023
+Edificio Cartagena,1,1,E.CA.102,estandar,true,false,true,1,2023
+Edificio Cartagena,1,1,E.CA.103,estandar,true,false,true,1,2023
+Edificio Cartagena,1,1,E.CA.104,estandar,true,false,true,1,2023
+Edificio Cartagena,1,1,E.CA.105,estandar,false,false,true,1,2023
+Edificio Cartagena,1,1,E.CA.106,estandar,false,false,true,1,2023
+Edificio Cartagena,1,1,E.CA.107,estandar,false,false,true,1,2023
+Edificio Cartagena,1,1,E.CA.108,estandar,false,false,false,1,2023
+Edificio Cartagena,1,1,E.CA.109,estandar,false,false,false,1,2023
+Edificio Cartagena,1,1,E.CA.110,estandar,false,false,false,1,2023
