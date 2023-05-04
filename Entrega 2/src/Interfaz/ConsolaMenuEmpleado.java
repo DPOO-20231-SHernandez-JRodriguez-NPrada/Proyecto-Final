@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -14,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class ConsolaMenuEmpleado extends JPanel{
+public class ConsolaMenuEmpleado extends JPanel implements ActionListener{
     
     private InterfazPrincipalJFrame ventanaPadre;
     private JLabel lbBienvenido;
@@ -49,6 +51,8 @@ public class ConsolaMenuEmpleado extends JPanel{
 		btnCrearReserva.setBackground(grisaceo);
 		btnCrearReserva.setFont(fuente);
 		btnCrearReserva.setBorder(vacio);
+        btnCrearReserva.addActionListener(this);
+        btnCrearReserva.setActionCommand("CREAR_RESERVA");
 
 		btnInfoReserva = new JButton("Informacion reserva");
 		btnInfoReserva.setPreferredSize(tamanho);
@@ -56,6 +60,8 @@ public class ConsolaMenuEmpleado extends JPanel{
 		btnInfoReserva.setBackground(grisaceo);
 		btnInfoReserva.setFont(fuente);
 		btnInfoReserva.setBorder(vacio);
+        btnInfoReserva.addActionListener(this);
+        btnInfoReserva.setActionCommand("INFO_RESERVA");
 
 		btnCheckIn = new JButton("Hacer check-in");
 		btnCheckIn.setPreferredSize(tamanho);
@@ -63,6 +69,8 @@ public class ConsolaMenuEmpleado extends JPanel{
 		btnCheckIn.setBackground(grisaceo);
 		btnCheckIn.setFont(fuente);
 		btnCheckIn.setBorder(vacio);
+        btnCheckIn.addActionListener(this);
+        btnCheckIn.setActionCommand("CHECK_IN");
 
 		btnCheckOut = new JButton("Hacer check-out");
 		btnCheckOut.setPreferredSize(tamanho);
@@ -70,6 +78,8 @@ public class ConsolaMenuEmpleado extends JPanel{
 		btnCheckOut.setBackground(grisaceo);
 		btnCheckOut.setFont(fuente);
 		btnCheckOut.setBorder(vacio);
+        btnCheckOut.addActionListener(this);
+        btnCheckOut.setActionCommand("CHECK_OUT");
 
 		btnAnadir = new JButton("Añadir servicios");
 		btnAnadir.setPreferredSize(tamanho);
@@ -77,6 +87,8 @@ public class ConsolaMenuEmpleado extends JPanel{
 		btnAnadir.setBackground(grisaceo);
 		btnAnadir.setFont(fuente);
 		btnAnadir.setBorder(vacio);
+        btnAnadir.addActionListener(this);
+        btnAnadir.setActionCommand("ANADIR_SERVICIOS");
 
 		btnSalir = new JButton("Salir");
 		btnSalir.setPreferredSize(tamanho);
@@ -84,6 +96,8 @@ public class ConsolaMenuEmpleado extends JPanel{
 		btnSalir.setBackground(Color.RED);
 		btnSalir.setFont(fuente);
 		btnSalir.setBorder(vacio);
+        btnSalir.addActionListener(this);
+        btnSalir.setActionCommand("SALIR");
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -108,6 +122,8 @@ public class ConsolaMenuEmpleado extends JPanel{
 			btnCambiarTarifa.setBackground(grisaceo);
 			btnCambiarTarifa.setFont(fuente);
 			btnCambiarTarifa.setBorder(vacio);
+            btnCambiarTarifa.addActionListener(this);
+            btnCambiarTarifa.setActionCommand("CAMBIAR_TARIFA");
 
 			btnOcupacion = new JButton("Consultar ocupacion");
 			btnOcupacion.setPreferredSize(tamanho);
@@ -119,6 +135,7 @@ public class ConsolaMenuEmpleado extends JPanel{
 			auxiliar.add(btnCambiarTarifa);
 			auxiliar.add(btnOcupacion);
 		}
+
 		auxiliar.add(btnSalir);
 		JPanel auxiliarX = new JPanel();
 		auxiliarX.setLayout(new BoxLayout(auxiliarX, BoxLayout.X_AXIS));
@@ -129,6 +146,37 @@ public class ConsolaMenuEmpleado extends JPanel{
 		add(Box.createVerticalStrut(80));
         
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String grito = e.getActionCommand();
+
+        if(grito.equals("CREAR_RESERVA")){
+            ventanaPadre.IrAPanelCrearReserva();
+        }
+        else if(grito.equals("INFO_RESERVA")){
+            ventanaPadre.IrAPanelInfoReserva();
+        }
+        else if(grito.equals("CHECK_IN")){
+            ventanaPadre.IrAPanelCheckIn();
+        }
+        else if(grito.equals("CHECK_OUT")){
+            ventanaPadre.IrAPanelCheckOut();
+        }
+        else if(grito.equals("ANADIR_SERVICIOS")){
+            ventanaPadre.IrAPanelAnadirServicios();
+        }
+        else if(grito.equals("CAMBIAR_TARIFA")){
+            ventanaPadre.IrAPanelCambiarTarifa();
+        }
+        else if(grito.equals("CONSULTAR_OCUPACION")){
+            ventanaPadre.IrAPanelConsultarOcupacion();
+        }
+        else if(grito.equals("SALIR")){
+            ventanaPadre.IrAPanelLogin();
+        }
+
     }
     
 }

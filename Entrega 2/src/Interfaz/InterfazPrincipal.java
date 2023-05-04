@@ -7,6 +7,10 @@ import Aplicacion.EnrutadorPrincipal;
 import Aplicacion.Input;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Servicios.Servicio;
+import Interfaz.ClasesReHechas.DialogoLogin;
+import Interfaz.ClasesReHechas.PanelOpciones;
+import Interfaz.ClasesViejas.ConsolaAdmin;
+import Interfaz.ClasesViejas.ConsolaEmpleado;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;

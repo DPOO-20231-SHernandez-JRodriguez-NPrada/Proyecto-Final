@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JFrame;
-import javax.swing.text.AbstractDocument.Content;
 
 import Aplicacion.EnrutadorPrincipal;
 import Aplicacion.Habitaciones.HabitacionBase;
@@ -139,9 +138,64 @@ public class InterfazPrincipalJFrame extends JFrame{
         else{
             consolaMenu = new ConsolaMenuEmpleado(this);
         }
+    }
 
-        remove(login);
+    public void IrAPanelConsolaMenu() {
+        getContentPane().removeAll();
         add(consolaMenu);
+        repaint();
+        revalidate();
+    }
+
+    public void IrAPanelCrearReserva() {
+        getContentPane().removeAll();
+        add(crearReserva);
+        repaint();
+        revalidate();
+    }
+
+    public void IrAPanelInfoReserva() {
+        getContentPane().removeAll();
+        add(informacionReservas);
+        repaint();
+        revalidate();
+    }
+
+    public void IrAPanelCheckIn() {
+        getContentPane().removeAll();
+        add(checkIn);
+        repaint();
+        revalidate();
+    }
+
+    public void IrAPanelCheckOut() {
+        getContentPane().removeAll();
+        add(checkOut);
+        repaint();
+        revalidate();
+    }
+
+    public void IrAPanelAnadirServicios() {
+        getContentPane().removeAll();
+        add(agregarServicio);
+        repaint();
+        revalidate();
+    }
+
+    public void IrAPanelCambiarTarifa() {
+        getContentPane().removeAll();
+        add(cambiarTarifa);
+        repaint();
+        revalidate();
+    }
+
+    public void IrAPanelConsultarOcupacion() {
+
+    }
+
+    public void IrAPanelLogin() {
+        getContentPane().removeAll();
+        add(login);
         repaint();
         revalidate();
     }
