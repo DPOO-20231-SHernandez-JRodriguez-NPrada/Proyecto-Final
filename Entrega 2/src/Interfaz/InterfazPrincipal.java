@@ -8,6 +8,12 @@ import Aplicacion.Input;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Servicios.Servicio;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  * InterfazPrincipal
  * 
@@ -15,13 +21,33 @@ import Aplicacion.Servicios.Servicio;
  * programa con la interfaz con la que interactua el
  * usuario
  */
-public class InterfazPrincipal {
+public class InterfazPrincipal extends JFrame {
 
+    private DialogoLogin login;
+    private PanelOpciones panelOpciones;
     private EnrutadorPrincipal enrutadorPrincipal;
     private ConsolaEmpleado consolaEmpleado;
 
     public InterfazPrincipal() {
         this.enrutadorPrincipal = new EnrutadorPrincipal();
+        setSize(new Dimension(800, 800));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Hotel Transilvania");
+        login = new DialogoLogin(this);
+
+        String username = login.getUsuario();
+        String password = login.getPassword();
+        JOptionPane.showMessageDialog(this, "Username: " + username + "\nPassword: " + password); // TODO esto hara que
+                                                                                                  // se vea si hubo
+                                                                                                  // error
+
+        // TODO del login debe conseguir de alguna manera si es admin o no
+        panelOpciones = new PanelOpciones(true);// debe recibir como parametro si es admin o no
+        setLayout(new FlowLayout());
+        add(panelOpciones);
+
+        setResizable(false);
+        setVisible(true);
     }
 
     public static void main(String[] args) {

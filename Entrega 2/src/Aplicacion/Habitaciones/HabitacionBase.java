@@ -12,6 +12,7 @@ public class HabitacionBase {
     private Boolean cocina;
     private Boolean balcon;
     private Boolean vista;
+
     public ArrayList<Integer> getCamas() {
         return camas;
     }
@@ -27,24 +28,26 @@ public class HabitacionBase {
     public void setAnio(int anio) {
         this.anio = anio;
     }
+
     private ArrayList<Integer> camas;
     private int anio;
-    
-    public HabitacionBase(String ubicacion, int capacidad, int capacidadMax, String id, String tipo, Boolean[] diasOcupado, Boolean cocina, Boolean balcon, Boolean vista, ArrayList<Integer> camas, int anio){
-        this.ubicacion=ubicacion;
-        this.capacidad=capacidad;
-        this.capacidadMax=capacidadMax;
-        this.id=id;
-        this.tipo=tipo;
-        this.diasOcupado=diasOcupado;
-        this.cocina=cocina;
-        this.balcon=balcon;
-        this.vista=vista;
-        this.camas=camas;
-        this.anio=anio;
+
+    public HabitacionBase(String ubicacion, int capacidad, int capacidadMax, String id, String tipo,
+            Boolean[] diasOcupado, Boolean cocina, Boolean balcon, Boolean vista, ArrayList<Integer> camas, int anio) {
+        this.ubicacion = ubicacion;
+        this.capacidad = capacidad;
+        this.capacidadMax = capacidadMax;
+        this.id = id;
+        this.tipo = tipo;
+        this.diasOcupado = diasOcupado;
+        this.cocina = cocina;
+        this.balcon = balcon;
+        this.vista = vista;
+        this.camas = camas;
+        this.anio = anio;
     }
 
-    //Getters And Setters
+    // Getters And Setters
     public String getUbicacion() {
         return ubicacion;
     }
@@ -117,11 +120,12 @@ public class HabitacionBase {
         this.vista = vista;
     }
 
-    public Boolean[] getOcupado(){
+    public Boolean[] getOcupado() {
         return this.diasOcupado;
     }
-    public void setOcupado( Boolean[] dias){
-        this.diasOcupado=dias;
+
+    public void setOcupado(Boolean[] dias) {
+        this.diasOcupado = dias;
     }
 
 }

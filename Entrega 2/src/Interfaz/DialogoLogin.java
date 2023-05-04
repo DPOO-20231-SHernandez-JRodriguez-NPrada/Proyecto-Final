@@ -13,21 +13,21 @@ public class DialogoLogin extends JDialog {
     public DialogoLogin(JFrame parent) {
         super(parent, "Login", true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setBackground(new Color(148,142,142));
+        setBackground(new Color(148, 142, 142));
         Font fuente = new Font("Arial", Font.BOLD, 18);
-        
+
         lbUsuario = new JLabel("      Usuario:");
         lbUsuario.setFont(fuente);
-        
+
         lbContrasena = new JLabel("   Contraseña:");
         lbContrasena.setFont(fuente);
-        
+
         txtUsuario = new JTextField();
         txtUsuario.setBackground(Color.WHITE);
-        
+
         txtContrasena = new JTextField();
         txtContrasena.setBackground(Color.WHITE);
-        
+
         btnIngresar = new JButton("Ingresar");
         btnIngresar.setBackground(Color.BLACK);
         btnIngresar.setForeground(Color.WHITE);
@@ -42,7 +42,7 @@ public class DialogoLogin extends JDialog {
         aux.add(lbContrasena);
         aux.add(txtContrasena);
         add(aux);
-        
+
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelBoton.add(btnIngresar);
         add(panelBoton);
@@ -69,4 +69,3 @@ public class DialogoLogin extends JDialog {
         return password;
     }
 }
-
