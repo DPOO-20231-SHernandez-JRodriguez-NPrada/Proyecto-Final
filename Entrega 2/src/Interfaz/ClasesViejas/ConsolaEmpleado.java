@@ -1,4 +1,4 @@
-package Interfaz;
+package Interfaz.ClasesViejas;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 import Aplicacion.Input;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Servicios.Servicio;
+import Interfaz.InterfazPrincipal;
 
 public class ConsolaEmpleado {
 
