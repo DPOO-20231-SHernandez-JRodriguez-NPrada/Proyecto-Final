@@ -2,14 +2,12 @@ package Interfaz;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -89,6 +87,7 @@ public class LoginInterfaz extends JPanel implements ActionListener{
 
             if(resultado.equals("admin") || resultado.equals("empleado")){
                 ventanaPadre.crearConsolaMenu(resultado);
+                ventanaPadre.IrAPanelConsolaMenu();
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR INCIO SESION", JOptionPane.ERROR_MESSAGE);
