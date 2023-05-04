@@ -1,0 +1,16 @@
+Nombre,Precio,HoraInicio,HoraFin,ValidoHabitacion
+Hamburguesa,5.99,12/00,23/00,true
+Pizza,7.99,12/00,23/00,true
+Papas Fritas,4.99,12/00,23/00,true
+Perro Caliente,5.99,12/00,23/00,true
+Nachos,3.99,12/00,23/00,true
+Ensalada Cesar,7.99,12/00,18/00,false
+Ensalada de Frutas,3.99,6/00,12/00,false
+Omelet,4.99,6/00,12/00,false
+Huevos Fritos,3.99,6/00,12/00,false
+Huevos Revueltos,3.99,6/00,12/00,false
+Mojito,12.49,14/00,00/00,false
+Margarita,14.49,14/00,00/00,false
+Coca-Cola,3.99,00/00,00/00,true
+Agua,3.99,00/00,00/00,true
+Cerveza,4.99,00/00,00/00,true

@@ -1,0 +1,6 @@
+nombre,documento,correo,numeroCelular
+Antonio Gordillo,1101745923,antonio2003@gmail.com,3137895634
+nombre,precio,descripcion,registro,fecha,pagado
+Sesion Buceo,125.99,Sesion de buceo por el arrecife,huesped,30/03/2023,false
+Mini golf,99.99,Sesion de mini golf,grupo,03/04/2023,false
+Spa,44.99,Una hora el spa,huesped,05/04/2023,true
