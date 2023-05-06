@@ -197,8 +197,13 @@ public class EnrutadorPrincipal {
         }
         
     }
+
     public void salirPrograma()
     {
         controladorBD.GuardarPrograma();
+    }
+
+    public Reserva ConseguirReserva(String documento){
+        return adminReservas.getReserva(documento);
     }
 }
