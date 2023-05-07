@@ -151,6 +151,8 @@ public class InterfazPrincipalJFrame extends JFrame{
 
     public void IrAPanelCrearReserva() {
         getContentPane().removeAll();
+        //TODO
+        //this.setSize(WIDTH, HEIGHT);
         add(crearReserva);
         repaint();
         revalidate();

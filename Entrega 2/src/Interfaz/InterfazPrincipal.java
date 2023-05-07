@@ -14,7 +14,6 @@ import Interfaz.ClasesViejas.ConsolaEmpleado;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
