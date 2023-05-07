@@ -247,9 +247,9 @@ public class InterfazPrincipalJFrame extends JFrame{
        return resultado;
     }
 
-    public double precioProducto(String producto) 
+    public double precioProducto(String producto, String cantidad) 
     {
-        return enrutadorPrincipal.precioProducto(producto);
+        return enrutadorPrincipal.precioProducto(producto, cantidad);
     }
 
     public void AñadirServicio(String documento, String servicio, String descripcion, String fecha, boolean pagado,
