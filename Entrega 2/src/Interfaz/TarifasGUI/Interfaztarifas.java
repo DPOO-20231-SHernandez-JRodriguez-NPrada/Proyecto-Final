@@ -47,9 +47,7 @@ public class Interfaztarifas extends JFrame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
     }
-    public static void main(String[] args) {
-        Interfaztarifas interfazservicios = new Interfaztarifas();
-    }
+    
     public void agregar() 
     {
         String precio = panelEntradas1.darprecio();

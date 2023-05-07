@@ -10,6 +10,7 @@ import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Servicios.Servicio;
 import Interfaz.ClasesViejas.ConsolaAdmin;
 import Interfaz.ClasesViejas.ConsolaEmpleado;
+import Interfaz.ServiciosGUI.Interfazservicios;
 
 /**
  * InterfazPrincipal
@@ -26,7 +27,7 @@ public class InterfazPrincipalJFrame extends JFrame{
     private LoginInterfaz login;
     private ConsolaMenuEmpleado consolaMenu;
     private CheckOutInterfaz checkOut;
-    private AgregarServicio agregarServicio;
+    private Interfazservicios agregarServicio;
     private CambiarTarifa cambiarTarifa;
     private RestauranteInterfaz restaurante;
 
@@ -43,7 +44,7 @@ public class InterfazPrincipalJFrame extends JFrame{
         this.login = new LoginInterfaz(this);
         this.consolaMenu = new ConsolaMenuEmpleado(this);
         this.checkOut = new CheckOutInterfaz(this);
-        this.agregarServicio = new AgregarServicio(this);
+        this.agregarServicio = new Interfazservicios(this);
         this.cambiarTarifa = new CambiarTarifa(this);
         this.restaurante = new RestauranteInterfaz(this);
 

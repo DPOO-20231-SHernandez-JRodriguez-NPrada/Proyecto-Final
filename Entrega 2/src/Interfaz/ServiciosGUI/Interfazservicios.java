@@ -3,8 +3,9 @@ package Interfaz.ServiciosGUI;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import Interfaz.InterfazPrincipalJFrame;
 import Interfaz.ServiciosGUI.GuiRestarurante.Interfazrestaurante;
-import Interfaz.InterfazPrincipal;
+
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,12 +13,15 @@ import java.awt.Dimension;
 
 public class Interfazservicios extends JFrame
 {
+
+    private InterfazPrincipalJFrame interfazpadre;
     private PanelEntradaservicios panelEntradas;
     private Paneldebotoneservicios paneldebotones;
 
 
-    public Interfazservicios()
+    public Interfazservicios(InterfazPrincipalJFrame interfazprincipaljFrame)
     {
+        interfazpadre = interfazprincipaljFrame;
         panelEntradas = new PanelEntradaservicios();
         paneldebotones = new Paneldebotoneservicios(this);
 
@@ -33,18 +37,16 @@ public class Interfazservicios extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
     }
-
-    public static void main(String[] args) {
-        Interfazservicios interfazservicios = new Interfazservicios();
-    }
-
+    
     public void agregar() 
     {
         String documento = panelEntradas.dardni();
         String servicio = panelEntradas.darnombreser();
         String fecha = panelEntradas.darfconsumo();
         boolean pagado = panelEntradas.darpagado();
+        double precio = 0;
         String descripcion = "";
+        interfazpadre.AñadirServicio(documento, servicio, descripcion, fecha, pagado, precio);
         
     }
 
