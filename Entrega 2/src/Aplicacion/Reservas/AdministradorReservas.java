@@ -116,6 +116,7 @@ public class AdministradorReservas {
         double precioS = Nombreservicio.getPrecio();
         double precioT = precioS + precio;
         String registro = Nombreservicio.getRegistro();
+        descripcion = "El servicio fue " + Nombreservicio.getNombre() + " y tuvo un costo de " + String.valueOf(precio) + ".";
         Servicio servicio = new Servicio(precioT, documento, fecha, pagado, descripcion, registro); 
         Reserva reserva = datosReservas.get(documento);
         ArrayList<HabitacionReserva> habitacionesRes = reserva.getHabitacionesReservadas();

@@ -81,7 +81,7 @@ public class Interfazservicios extends JFrame
         }
         else
         {
-            new Interfazrestaurante(documento,servicio,fecha,pagado);
+            new Interfazrestaurante(documento,servicio,fecha,pagado,interfazpadre);
         }
     }
 

@@ -1,6 +1,9 @@
 package Interfaz.ServiciosGUI.GuiRestarurante;
 
 import javax.swing.JFrame;
+
+import Interfaz.InterfazPrincipalJFrame;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -15,9 +18,12 @@ public class Interfazrestaurante extends JFrame
     private String fecha;
     private boolean pagado;
     private double precio;
+    private InterfazPrincipalJFrame interpadreser;
 
-    public Interfazrestaurante(String documento,String servicio,String fecha,boolean pagado)
+    public Interfazrestaurante(String documento,String servicio,String fecha,boolean pagado, InterfazPrincipalJFrame interfazservicios)
     {
+
+        this.interpadreser = interfazservicios;
         this.documento = documento;
         this.servicio = servicio;
         this.fecha = fecha;
@@ -45,7 +51,8 @@ public class Interfazrestaurante extends JFrame
     {
         String nombre = panelEntradasR.darnproducto();
         String cant = panelEntradasR.darvconsumo();
-        /*Enviar para obtener el precio  */
+        double precioProd = interpadreser.precioProducto(nombre,cant); 
+        this.precio += precioProd;
     }
 
     public void salir() 
@@ -60,6 +67,7 @@ public class Interfazrestaurante extends JFrame
 
     public void agregarSer() 
     {
-        /*Se envian todos los valores para agregar el servicio */
+        String descripcion = "";
+        interpadreser.AñadirServicio(documento, servicio, descripcion, fecha, pagado, precio);
     }
 }

@@ -11,6 +11,7 @@ import Aplicacion.Servicios.Servicio;
 import Interfaz.ClasesViejas.ConsolaAdmin;
 import Interfaz.ClasesViejas.ConsolaEmpleado;
 import Interfaz.ServiciosGUI.Interfazservicios;
+import Interfaz.TarifasGUI.Interfaztarifas;
 
 /**
  * InterfazPrincipal
@@ -28,7 +29,7 @@ public class InterfazPrincipalJFrame extends JFrame{
     private ConsolaMenuEmpleado consolaMenu;
     private CheckOutInterfaz checkOut;
     private Interfazservicios agregarServicio;
-    private CambiarTarifa cambiarTarifa;
+    private Interfaztarifas cambiarTarifa;
     private RestauranteInterfaz restaurante;
 
 
@@ -45,7 +46,7 @@ public class InterfazPrincipalJFrame extends JFrame{
         this.consolaMenu = new ConsolaMenuEmpleado(this);
         this.checkOut = new CheckOutInterfaz(this);
         this.agregarServicio = new Interfazservicios(this);
-        this.cambiarTarifa = new CambiarTarifa(this);
+        this.cambiarTarifa = new Interfaztarifas(this);
         this.restaurante = new RestauranteInterfaz(this);
 
         setTitle("SISTEMA HOTEL DPOO");
