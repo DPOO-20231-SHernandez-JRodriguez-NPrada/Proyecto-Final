@@ -2,6 +2,7 @@ package Interfaz.ServiciosGUI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Interfaz.InterfazPrincipalJFrame;
@@ -52,29 +53,10 @@ public class Interfazservicios extends JPanel
         String servicio = panelEntradas.darnombreser();
         String fecha = panelEntradas.darfconsumo();
         boolean pagado = panelEntradas.darpagado();
-        if(documento.equals(""))
+        if(documento.equals("")||servicio.equals("")||fecha.equals(""))
         {
-            JFrame ventana = new JFrame("Error");
-            JLabel mensaje = new JLabel("Llene el documento");
-            ventana.add(mensaje);
-            ventana.setSize(300, 200);
-            ventana.setVisible(true);
-        }
-        if(servicio.equals(""))
-        {
-            JFrame ventana = new JFrame("Error");
-            JLabel mensaje = new JLabel("Llene el nombre del servicio");
-            ventana.add(mensaje);
-            ventana.setSize(300, 200);
-            ventana.setVisible(true);
-        }
-        if(fecha.equals(""))
-        {
-            JFrame ventana = new JFrame("Error");
-            JLabel mensaje = new JLabel("Llene la fecha");
-            ventana.add(mensaje);
-            ventana.setSize(300, 200);
-            ventana.setVisible(true);
+            
+            JOptionPane.showMessageDialog(null, "Alguna de las casillas no ha sido rellenada", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
