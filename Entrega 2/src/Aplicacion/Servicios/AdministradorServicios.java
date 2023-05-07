@@ -27,11 +27,17 @@ public class AdministradorServicios {
         return servicio;
     }
 
-    public double precioProducto(String nombre) {
+    public double precioProducto(String nombre,String cantidad) {
         double precio = 0;
-        for (int i = 0; i < this.menuProductos.size(); i++) {
+        int cant = Integer.parseInt(cantidad);
+        for(int i = 0;i<this.menuProductos.size();i++)
+        {
             Producto producto = menuProductos.get(i);
-            precio = producto.getPrecio();
+            if(producto.getNombre().equals(nombre))
+            {
+                precio = producto.getPrecio();
+                precio = precio*cant;
+            }
         }
         return precio;
     }

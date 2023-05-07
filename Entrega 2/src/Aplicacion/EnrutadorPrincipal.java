@@ -146,9 +146,9 @@ public class EnrutadorPrincipal {
             adminHuespedes.AñadirServicio(documento,servicio,descripcion,fecha,pagado,precio);
         }
     }
-    public double precioProducto(String nombre)
+    public double precioProducto(String nombre, String cantidad)
     {
-        double precio = adminServicios.precioProducto(nombre);
+        double precio = adminServicios.precioProducto(nombre,cantidad);
         return precio;
     }
     public void HacerCheckIn(String documentoPrincipal, String documento, String nombre, String correo, String celular)
