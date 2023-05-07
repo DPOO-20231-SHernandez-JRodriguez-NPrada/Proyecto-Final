@@ -2,6 +2,7 @@ package Interfaz.ServiciosGUI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import Interfaz.InterfazPrincipalJFrame;
 import Interfaz.ServiciosGUI.GuiRestarurante.Interfazrestaurante;
@@ -11,7 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 
-public class Interfazservicios extends JFrame
+public class Interfazservicios extends JPanel
 {
 
     private InterfazPrincipalJFrame interfazpadre;
@@ -32,10 +33,6 @@ public class Interfazservicios extends JFrame
 
 
         setSize(new Dimension(700,200));
-        setResizable(false);
-		setTitle("Servicios");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
     }
     
     public void agregar() 
@@ -87,6 +84,5 @@ public class Interfazservicios extends JFrame
 
     public void salir() 
     {
-        dispose();
     }
 }

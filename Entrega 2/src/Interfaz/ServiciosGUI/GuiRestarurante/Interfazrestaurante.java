@@ -41,9 +41,6 @@ public class Interfazrestaurante extends JFrame
         add(paneldebotonesR,BorderLayout.SOUTH);
 
         setSize(new Dimension(800,350));
-        setResizable(false);
-		setTitle("Restaurante");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
     }
 

@@ -8,7 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
-public class Interfaztarifas extends JFrame 
+public class Interfaztarifas extends JPanel 
 {
     private PanelEntradasTarifas panelEntradas1;
     private PanelEntradasTarifas panelEntradas2;
@@ -49,7 +49,6 @@ public class Interfaztarifas extends JFrame
         frame.setResizable(false);
 		frame.setTitle("Tarifas");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
     }
     
     public void agregar() 
@@ -67,7 +66,7 @@ public class Interfaztarifas extends JFrame
     
     public void salir() 
     {
-        dispose();
+       
     }
 
 }
