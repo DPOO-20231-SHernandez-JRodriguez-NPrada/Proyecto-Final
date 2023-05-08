@@ -3,7 +3,6 @@ package Aplicacion;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 import Aplicacion.Habitaciones.AdministradorHabitaciones;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Huespedes.AdministradorHuespedes;
@@ -21,9 +20,8 @@ import Facturas.AdministradorFacturas;
 import Login.AdministradorLogin;
 import Facturas.Factura;
 
-
 public class EnrutadorPrincipal {
-    
+
     private ControladorBaseDatos controladorBD;
     private AdministradorLogin adminLogin;
     private AdministradorFacturas adminFacturas;
@@ -48,12 +46,12 @@ public class EnrutadorPrincipal {
         this.checkInOut = new ChekInOut();
 
     }
-    
+
     /*
      * CargarAplicacion
      * 
      * Se encarga de comunicarse con los otros administradores para
-     * cargar los datos de la aplicacion, asignandole a cada administrador 
+     * cargar los datos de la aplicacion, asignandole a cada administrador
      * los datos que necesita
      * 
      */
@@ -69,9 +67,9 @@ public class EnrutadorPrincipal {
     }
 
     private void CargarDatosLogin() {
-        HashMap<String,String> datosLogin = controladorBD.ConseguirDatosLogin();
+        HashMap<String, String> datosLogin = controladorBD.ConseguirDatosLogin();
         adminLogin.AsignarDatos(datosLogin);
-    } 
+    }
 
     private void CargarDatosReservas() {
         HashMap<String, Reserva> datosReservas = controladorBD.ConseguirDatosReservas();
@@ -84,7 +82,7 @@ public class EnrutadorPrincipal {
     }
 
     private void CargarDatosHabitaciones() {
-        HashMap<String,HabitacionBase> datosHabitacionBase = controladorBD.ConseguirHabitacionesBase();
+        HashMap<String, HabitacionBase> datosHabitacionBase = controladorBD.ConseguirHabitacionesBase();
         adminHabitaciones.AsignarHabitacionesBase(datosHabitacionBase);
     }
 
@@ -95,7 +93,7 @@ public class EnrutadorPrincipal {
 
     private void CargarDatosTarifas() {
         ArrayList<Tarifa> datosTarifas = controladorBD.ConseguirDatosTarifas();
-        adminTarifas.AsignarTarifas(datosTarifas);   
+        adminTarifas.AsignarTarifas(datosTarifas);
     }
 
     private void CargarDatosMenu() {
@@ -107,76 +105,77 @@ public class EnrutadorPrincipal {
         HashMap<String, ArrayList<Factura>> datosFacturas = controladorBD.ConseguirDatosFacturas();
         adminFacturas.AsignarFacturas(datosFacturas);
     }
-    
+
     public String ComprobarLogin(String usuario, String contrasenia) {
         return adminLogin.ComprobarLogin(usuario, contrasenia);
     }
- 
-    public void cambiarTarifa(String tipo, int anio, Double precio, String finicio, String ffinal, ArrayList<String> dias)
-    {
+
+    public void cambiarTarifa(String tipo, int anio, Double precio, String finicio, String ffinal,
+            ArrayList<String> dias) {
         this.adminTarifas.cambiarTarifa(tipo, anio, precio, finicio, ffinal, dias);
     }
 
-
-    public double CrearReserva(String documento, String estadoReserva, int personasEsperadas, String fechainicial, String fechafinal, ArrayList<HabitacionBase> HabitacionesBs, String nombre, String correo, String celular)
-    {
+    public double CrearReserva(String documento, String estadoReserva, int personasEsperadas, String fechainicial,
+            String fechafinal, ArrayList<HabitacionBase> HabitacionesBs, String nombre, String correo, String celular) {
         Huesped huesped = adminHuespedes.crearHuesped(nombre, documento, correo, celular);
-       double precio = adminReservas.CrearReserva(documento,estadoReserva,personasEsperadas,fechainicial,fechafinal,HabitacionesBs, huesped);
+        double precio = adminReservas.CrearReserva(documento, estadoReserva, personasEsperadas, fechainicial,
+                fechafinal, HabitacionesBs, huesped);
         return precio;
     }
-    public String VerReserva(String documento)
-    {
+
+    public String VerReserva(String documento) {
         String Texto = adminReservas.VerReserva(documento);
         return Texto;
     }
-    public String  EliminarReserva(String documento, String fechactual)
-    {
-        String resultado = adminReservas.eliminarReserva(documento,fechactual);
+
+    public String EliminarReserva(String documento, String fechactual) {
+        String resultado = adminReservas.eliminarReserva(documento, fechactual);
         return resultado;
     }
-    public void AñadirServicio(String documento, String Nombreservicio, String descripcion, String fecha, boolean pagado,double precio)
-    {
+
+    public void AñadirServicio(String documento, String Nombreservicio, String descripcion, String fecha,
+            boolean pagado, double precio) {
         ServicioBase servicio = adminServicios.darServicio(Nombreservicio);
-        if(servicio.getRegistro().equals("habitacion"))
-        {
-            adminReservas.AñadirServicio(documento,servicio,descripcion,fecha,pagado,precio);
-        }
-        else
-        {
-            adminHuespedes.AñadirServicio(documento,servicio,descripcion,fecha,pagado,precio);
+        if (servicio.getRegistro().equals("habitacion")) {
+            adminReservas.AñadirServicio(documento, servicio, descripcion, fecha, pagado, precio);
+        } else {
+            adminHuespedes.AñadirServicio(documento, servicio, descripcion, fecha, pagado, precio);
         }
     }
-    public double precioProducto(String nombre)
-    {
+
+    public double precioProducto(String nombre) {
         double precio = adminServicios.precioProducto(nombre);
         return precio;
     }
-    public void HacerCheckIn(String documentoPrincipal, String documento, String nombre, String correo, String celular)
-    {
+
+    public void HacerCheckIn(String documentoPrincipal, String documento, String nombre, String correo,
+            String celular) {
         Huesped huesped = adminHuespedes.crearHuesped(nombre, documento, correo, celular);
         Reserva reserva = adminReservas.getReserva(documentoPrincipal);
         checkInOut.CheckIn(reserva, huesped);
     }
-    public void HacerCheckout()
-    {
-        
+
+    public void HacerCheckout() {
+
     }
-    public ArrayList<HabitacionBase> buscarHabitaciones(Boolean cocina, Boolean balcon, Boolean vista, String fechai, String fechaf, String tipo)
-    {
-        ArrayList<HabitacionBase> HabitacionesBs = adminHabitaciones.buscarHabitaciones(cocina, balcon, vista, fechai, fechaf, tipo);
+
+    public ArrayList<HabitacionBase> buscarHabitaciones(Boolean cocina, Boolean balcon, Boolean vista, String fechai,
+            String fechaf, String tipo) {
+        ArrayList<HabitacionBase> HabitacionesBs = adminHabitaciones.buscarHabitaciones(cocina, balcon, vista, fechai,
+                fechaf, tipo);
         return HabitacionesBs;
     }
-    public void modificarEstadoOcupado(String id,String fechainicial, String fechafinal,boolean cambio)
-    {
+
+    public void modificarEstadoOcupado(String id, String fechainicial, String fechafinal, boolean cambio) {
         adminHabitaciones.modificarEstadoOcupado(id, fechainicial, fechafinal, cambio);
     }
-    public Huesped crearHuesped(String nombre, String doc, String correo, String celular)
-    {
+
+    public Huesped crearHuesped(String nombre, String doc, String correo, String celular) {
         Huesped huesped = adminHuespedes.crearHuesped(nombre, doc, correo, celular);
         return huesped;
     }
-    public double calcularPrecio(Reserva datosReserva)
-    {
+
+    public double calcularPrecio(Reserva datosReserva) {
         double precio = adminTarifas.CalcularEstadia(datosReserva);
         return precio;
     }
@@ -187,7 +186,7 @@ public class EnrutadorPrincipal {
         return checkInOut.CheckOut(reserva, confirmarPago);
     }
 
-    public void facturarReserva(String documento){
+    public void facturarReserva(String documento) {
         Reserva reserva = adminReservas.getReserva(documento);
         ArrayList<Huesped> huespedes = reserva.getGrupo();
 
@@ -195,10 +194,14 @@ public class EnrutadorPrincipal {
         for (Huesped huesped : huespedes) {
             adminFacturas.CrearFacturaCliente(huesped);
         }
-        
+
     }
-    public void salirPrograma()
-    {
+
+    public HashMap<String, Boolean[]> getOcupacionHotel() {
+        return adminHabitaciones.getOcupados();
+    }
+
+    public void salirPrograma() {
         controladorBD.GuardarPrograma();
     }
 }
