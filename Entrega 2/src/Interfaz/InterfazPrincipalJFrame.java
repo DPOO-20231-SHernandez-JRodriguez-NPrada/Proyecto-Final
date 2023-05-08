@@ -7,9 +7,10 @@ import javax.swing.JFrame;
 
 import Aplicacion.EnrutadorPrincipal;
 import Aplicacion.Habitaciones.HabitacionBase;
+import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.Servicio;
-import Interfaz.ClasesViejas.ConsolaAdmin;
-import Interfaz.ClasesViejas.ConsolaEmpleado;
+import Interfaz.ServiciosGUI.Interfazservicios;
+import Interfaz.TarifasGUI.Interfaztarifas;
 
 /**
  * InterfazPrincipal
@@ -26,13 +27,12 @@ public class InterfazPrincipalJFrame extends JFrame {
     private LoginInterfaz login;
     private ConsolaMenuEmpleado consolaMenu;
     private CheckOutInterfaz checkOut;
-    private AgregarServicio agregarServicio;
-    private CambiarTarifa cambiarTarifa;
+    private Interfazservicios agregarServicio;
+    private Interfaztarifas cambiarTarifa;
     private RestauranteInterfaz restaurante;
     private ConsultarOcupacion consultarOcupacion;
 
     private EnrutadorPrincipal enrutadorPrincipal;
-    private ConsolaEmpleado consolaEmpleado;
 
     public InterfazPrincipalJFrame() {
         this.enrutadorPrincipal = new EnrutadorPrincipal();
@@ -43,8 +43,8 @@ public class InterfazPrincipalJFrame extends JFrame {
         this.login = new LoginInterfaz(this);
         this.consolaMenu = new ConsolaMenuEmpleado(this);
         this.checkOut = new CheckOutInterfaz(this);
-        this.agregarServicio = new AgregarServicio(this);
-        this.cambiarTarifa = new CambiarTarifa(this);
+        this.agregarServicio = new Interfazservicios(this);
+        this.cambiarTarifa = new Interfaztarifas(this);
         this.restaurante = new RestauranteInterfaz(this);
         this.consultarOcupacion = new ConsultarOcupacion(this);
 
@@ -54,6 +54,7 @@ public class InterfazPrincipalJFrame extends JFrame {
 
         add(login);
         setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -150,6 +151,8 @@ public class InterfazPrincipalJFrame extends JFrame {
 
     public void IrAPanelCrearReserva() {
         getContentPane().removeAll();
+        //TODO
+        //this.setSize(WIDTH, HEIGHT);
         add(crearReserva);
         repaint();
         revalidate();
@@ -204,6 +207,11 @@ public class InterfazPrincipalJFrame extends JFrame {
         revalidate();
     }
 
+    public Reserva ConseguirReserva(String documento){
+        return enrutadorPrincipal.ConseguirReserva(documento);
+    }
+
+
     /*
      * IniciarAplicacion
      * 
@@ -211,12 +219,7 @@ public class InterfazPrincipalJFrame extends JFrame {
      * este, dependiendo del tipo de consola que se haya establecido
      */
     private void IniciarAplicacion() {
-        if (consolaEmpleado instanceof ConsolaAdmin) {
-            ComprobarTarifaActual();
-        }
-
-        consolaEmpleado.IniciarPrograma();
-
+       
     }
 
     public EnrutadorPrincipal getEP() {
@@ -249,8 +252,9 @@ public class InterfazPrincipalJFrame extends JFrame {
         return resultado;
     }
 
-    public double precioProducto(String producto) {
-        return enrutadorPrincipal.precioProducto(producto);
+    public double precioProducto(String producto, String cantidad) 
+    {
+        return enrutadorPrincipal.precioProducto(producto, cantidad);
     }
 
     public void AñadirServicio(String documento, String servicio, String descripcion, String fecha, boolean pagado,
