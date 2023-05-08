@@ -216,7 +216,9 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
                     "Se ha registrado la salida de la reserva bajo el documento " + documento + ".");
 
         } else if (grito.equals("SALIR")) {
-            System.exit(0);
+            // this.removeAll();
+
+            ventanaPadre.IrAPanelConsolaMenu();
 
         } else {
             System.out.println("No se reconoce el comando");

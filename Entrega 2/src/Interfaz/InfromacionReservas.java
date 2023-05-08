@@ -239,7 +239,7 @@ public class InfromacionReservas extends JPanel implements ActionListener {
             updateReservationInfo(reserva);
 
         } else if (grito.equals("SALIR")) {
-            System.exit(0);
+            ventanaPadre.IrAPanelConsolaMenu();
         } else if (grito.equals("ELIMINAR")) {
             documento = txtDocumento.getText();
             System.out.println(documento);
