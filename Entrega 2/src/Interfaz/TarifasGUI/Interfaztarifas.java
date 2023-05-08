@@ -16,7 +16,6 @@ public class Interfaztarifas extends JPanel
     private PanelBotonesTarifas paneldebotones;
     private InterfazPrincipalJFrame interfazpadre;
 
-    private JFrame frame;
     private JPanel panel1;
     private JPanel panel2;
     private JPanel panel3;
@@ -29,7 +28,6 @@ public class Interfaztarifas extends JPanel
         panelEntradas3 = new PanelEntradasTarifas(3);
         paneldebotones = new PanelBotonesTarifas(this);
 
-        frame = new JFrame("Tarifas");
         panel1 = new JPanel();
         panel2 = new JPanel();
         panel3 = new JPanel();
@@ -41,14 +39,11 @@ public class Interfaztarifas extends JPanel
 
         panel3.add(paneldebotones);
 
-        frame.add(panel1,BorderLayout.NORTH);
-        frame.add(panel2,BorderLayout.CENTER);
-        frame.add(panel3,BorderLayout.SOUTH);
+        add(panel1,BorderLayout.NORTH);
+        add(panel2,BorderLayout.CENTER);
+        add(panel3,BorderLayout.SOUTH);
 
-        frame.setSize(new Dimension(800,600));
-        frame.setResizable(false);
-		frame.setTitle("Tarifas");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(new Dimension(800,600));
     }
     
     public void agregar() 
