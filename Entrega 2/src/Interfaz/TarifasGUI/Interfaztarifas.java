@@ -1,5 +1,4 @@
 package Interfaz.TarifasGUI;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Interfaz.InterfazPrincipalJFrame;

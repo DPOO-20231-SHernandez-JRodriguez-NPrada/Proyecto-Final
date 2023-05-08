@@ -1,7 +1,4 @@
 package Interfaz.ServiciosGUI;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -36,7 +33,7 @@ public class Interfazservicios extends JPanel
         setSize(new Dimension(700,200));
     }
     
-    public void agregar() 
+    public void agregar()
     {
         String documento = panelEntradas.dardni();
         String servicio = panelEntradas.darnombreser();
@@ -44,7 +41,14 @@ public class Interfazservicios extends JPanel
         boolean pagado = panelEntradas.darpagado();
         double precio = 0;
         String descripcion = "";
-        interfazpadre.AñadirServicio(documento, servicio, descripcion, fecha, pagado, precio);
+        if(documento.equals("")||servicio.equals("")||fecha.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Alguna de las casillas no ha sido rellenada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            interfazpadre.AñadirServicio(documento, servicio, descripcion, fecha, pagado, precio);
+        }
         
     }
 
@@ -53,7 +57,7 @@ public class Interfazservicios extends JPanel
         String servicio = panelEntradas.darnombreser();
         String fecha = panelEntradas.darfconsumo();
         boolean pagado = panelEntradas.darpagado();
-        if(documento.equals("")||servicio.equals("")||fecha.equals(""))
+        if(documento.equals("")||servicio.equals("")||fecha.equals("")||fecha.equals(""))
         {
             
             JOptionPane.showMessageDialog(null, "Alguna de las casillas no ha sido rellenada", "ERROR", JOptionPane.ERROR_MESSAGE);
