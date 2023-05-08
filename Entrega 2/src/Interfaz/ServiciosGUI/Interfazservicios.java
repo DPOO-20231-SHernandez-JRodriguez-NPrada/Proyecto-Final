@@ -66,5 +66,6 @@ public class Interfazservicios extends JPanel
 
     public void salir() 
     {
+        interfazpadre.IrAPanelConsolaMenu();
     }
 }

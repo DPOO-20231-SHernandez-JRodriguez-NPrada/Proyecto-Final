@@ -22,7 +22,7 @@ public class Interfaztarifas extends JPanel
 
     public Interfaztarifas(InterfazPrincipalJFrame interfazPrincipal)
     {
-
+        this.interfazpadre = interfazPrincipal;
         panelEntradas1 = new PanelEntradasTarifas(1);
         panelEntradas2 = new PanelEntradasTarifas(2);
         panelEntradas3 = new PanelEntradasTarifas(3);
@@ -61,7 +61,7 @@ public class Interfaztarifas extends JPanel
     
     public void salir() 
     {
-       
+       interfazpadre.IrAPanelConsolaMenu();
     }
 
 }
