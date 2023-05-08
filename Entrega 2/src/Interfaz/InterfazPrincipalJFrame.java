@@ -9,8 +9,6 @@ import Aplicacion.EnrutadorPrincipal;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.Servicio;
-import Interfaz.ClasesViejas.ConsolaAdmin;
-import Interfaz.ClasesViejas.ConsolaEmpleado;
 import Interfaz.ServiciosGUI.Interfazservicios;
 import Interfaz.TarifasGUI.Interfaztarifas;
 
@@ -35,7 +33,6 @@ public class InterfazPrincipalJFrame extends JFrame {
     private ConsultarOcupacion consultarOcupacion;
 
     private EnrutadorPrincipal enrutadorPrincipal;
-    private ConsolaEmpleado consolaEmpleado;
 
     public InterfazPrincipalJFrame() {
         this.enrutadorPrincipal = new EnrutadorPrincipal();
@@ -222,12 +219,7 @@ public class InterfazPrincipalJFrame extends JFrame {
      * este, dependiendo del tipo de consola que se haya establecido
      */
     private void IniciarAplicacion() {
-        if (consolaEmpleado instanceof ConsolaAdmin) {
-            ComprobarTarifaActual();
-        }
-
-        consolaEmpleado.IniciarPrograma();
-
+       
     }
 
     public EnrutadorPrincipal getEP() {
