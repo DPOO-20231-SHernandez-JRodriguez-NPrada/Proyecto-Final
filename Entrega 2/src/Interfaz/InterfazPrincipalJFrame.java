@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import Aplicacion.EnrutadorPrincipal;
 import Aplicacion.Habitaciones.HabitacionBase;
+import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.Servicio;
 import Interfaz.ClasesViejas.ConsolaAdmin;
 import Interfaz.ClasesViejas.ConsolaEmpleado;
@@ -55,6 +56,7 @@ public class InterfazPrincipalJFrame extends JFrame{
 
         add(login);
         setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -151,6 +153,8 @@ public class InterfazPrincipalJFrame extends JFrame{
 
     public void IrAPanelCrearReserva() {
         getContentPane().removeAll();
+        //TODO
+        //this.setSize(WIDTH, HEIGHT);
         add(crearReserva);
         repaint();
         revalidate();
@@ -202,7 +206,9 @@ public class InterfazPrincipalJFrame extends JFrame{
         revalidate();
     }
 
-
+    public Reserva ConseguirReserva(String documento){
+        return enrutadorPrincipal.ConseguirReserva(documento);
+    }
 
 
     /*

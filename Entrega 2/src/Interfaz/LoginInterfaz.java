@@ -5,8 +5,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,24 +26,31 @@ public class LoginInterfaz extends JPanel implements ActionListener{
         this.ventanaPadre = parent;
         setBackground(new Color(148, 142, 142));
         Font fuente = new Font("Arial", Font.BOLD, 18);
+        Dimension estandar = new Dimension(100, 50);
 
-        lbUsuario = new JLabel("      Usuario:");
+        lbUsuario = new JLabel("               Usuario:");
         lbUsuario.setFont(fuente);
+        lbUsuario.setForeground(Color.BLACK);
+        lbUsuario.setMaximumSize(estandar);
 
-        lbContrasena = new JLabel("   Contraseña:");
+        lbContrasena = new JLabel("            Contraseña:");
         lbContrasena.setFont(fuente);
+        lbContrasena.setMaximumSize(estandar);
+        lbContrasena.setForeground(Color.BLACK);
 
         txtUsuario = new JTextField();
         txtUsuario.setBackground(Color.WHITE);
+        txtUsuario.setMaximumSize(estandar);
 
         txtContrasena = new JTextField();
         txtContrasena.setBackground(Color.WHITE);
+        txtContrasena.setMaximumSize(estandar);
 
         btnIngresar = new JButton("Ingresar");
         btnIngresar.setBackground(Color.BLACK);
         btnIngresar.setForeground(Color.WHITE);
         btnIngresar.setFont(fuente);
-        btnIngresar.setMaximumSize(new Dimension(200, 200));
+        btnIngresar.setMaximumSize(estandar);
         btnIngresar.addActionListener(this);
         btnIngresar.setActionCommand("INGRESAR");
 
@@ -50,21 +58,27 @@ public class LoginInterfaz extends JPanel implements ActionListener{
         btnSalir.setBackground(Color.BLACK);
         btnSalir.setForeground(Color.WHITE);
         btnSalir.setFont(fuente);
-        btnSalir.setMaximumSize(new Dimension(200, 200));
+        btnSalir.setMaximumSize(estandar);
         btnSalir.addActionListener(this);
         btnSalir.setActionCommand("SALIR");
 
-        setLayout(new GridLayout(3, 3, 30, 5));
-        add(lbUsuario);
-        add(txtUsuario);
-        add(lbContrasena);
-        add(txtContrasena);
-        add(btnIngresar);
-        add(btnSalir);
+        JPanel aux = new JPanel();
+        aux.setLayout(new GridLayout(3, 2,5,50));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        aux.add(lbUsuario);
+        aux.add(txtUsuario);
+        aux.add(lbContrasena);
+        aux.add(txtContrasena);
+        aux.add(btnIngresar);
+        aux.add(btnSalir);
+        aux.setBackground(getBackground());
 
+        add(Box.createVerticalGlue());
+        add(aux);
+        add(Box.createVerticalGlue());
         btnIngresar.addActionListener(this);
 
-        setSize(800, 600);
+        setSize(250, 200);
         setVisible(true);
     }
 
