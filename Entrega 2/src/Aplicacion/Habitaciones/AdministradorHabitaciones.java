@@ -153,4 +153,14 @@ public class AdministradorHabitaciones {
         return centinela; // retorna true si cumple | false si no cumple
     }
 
+    public HashMap<String, Boolean[]> getOcupados() {
+        HashMap<String, Boolean[]> ocupados = new HashMap<>();
+        Set<String> ids = this.hashHabitaciones.keySet();
+        for (String id : ids) {
+            HabitacionBase habitacion = hashHabitaciones.get(id);
+            ocupados.put(id, habitacion.getDiasOcupado());
+        }
+        return ocupados;
+    }
+
 }
