@@ -35,7 +35,7 @@ public class InfromacionReservas extends JPanel implements ActionListener {
 
     public InfromacionReservas(InterfazPrincipalJFrame interfazPrincipalJFrame) {
         // Empty info
-        fechaInicio = "2";
+        fechaInicio = "";
         fechaFin = "";
         huespedes = "";
         cantidadHab = "";

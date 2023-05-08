@@ -9,7 +9,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -21,9 +23,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import Aplicacion.Servicios.Servicio;
+
 public class CheckOutInterfaz extends JPanel implements ActionListener {
 
-    private String servicios, total;
+    private String servicios;
+    private Double total;
     private InterfazPrincipalJFrame ventanaPadre;
     private JPanel searchPanel, checkOutPanel, buttonPanel;
     private JLabel lbDocumento, lbTitle;
@@ -35,8 +40,8 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
 
     public CheckOutInterfaz(InterfazPrincipalJFrame interfazPrincipalJFrame) {
         // Empty info
-        servicios = "2";
-        total = "";
+        servicios = "";
+        total = 0.0;
 
         ventanaPadre = interfazPrincipalJFrame;
         setLayout(new BorderLayout());
@@ -104,7 +109,8 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
     }
 
     // Panel de información de reservas
-    public JPanel getCheckOutPanel(String servicios, String total) {
+    public JPanel getCheckOutPanel(String servicios, Double totalDouble) {
+        String totalString = totalDouble.toString();
         JPanel panel = new JPanel(new GridLayout(2, 2));
         panel.setBorder(BorderFactory.createEmptyBorder(100, 200, 100, 200));
 
@@ -118,7 +124,7 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
 
         // Set text fields
         serviciosTextField.setText(servicios);
-        fechaFTextField.setText(total);
+        fechaFTextField.setText(totalString);
 
         // Adding components to the panel
         panel.add(serviciosLabel);
@@ -161,20 +167,26 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
         return buttonPanel;
     }
 
-    private void updateReservationInfo(String stringReserva) {
+    private void updateCheckoutInfo(HashMap<String, ArrayList<Servicio>> serviciosConsumidosPorNombreHuesped) {
         // fechaini + "," + total + "," + personasEs + "," + cantidadHab + "," + id;
-        String[] datos = stringReserva.split(",");
-        servicios = datos[0];
-        total = datos[1];
+
+        for (String nombreHuesped : serviciosConsumidosPorNombreHuesped.keySet()) {
+            ArrayList<Servicio> serviciosConsumidos = serviciosConsumidosPorNombreHuesped.get(nombreHuesped);
+            for (Servicio servicio : serviciosConsumidos) {
+                servicios += servicio.getNombre() + " " + servicio.getPrecio() + "\n";
+                total += servicio.getPrecio();
+            }
+        }
+
         System.out.println(servicios);
         System.out.println(total);
         // Update info panel
-        ventanaPadre.removeAll();
-        ventanaPadre.add(getSearchPanel(), BorderLayout.PAGE_START);
-        ventanaPadre.add(getCheckOutPanel(servicios, total), BorderLayout.CENTER);
-        ventanaPadre.add(getButtonPanel(), BorderLayout.PAGE_END);
-        ventanaPadre.revalidate();
-        ventanaPadre.repaint();
+        this.removeAll();
+        this.add(getSearchPanel(), BorderLayout.PAGE_START);
+        this.add(getCheckOutPanel(servicios, total), BorderLayout.CENTER);
+        this.add(getButtonPanel(), BorderLayout.PAGE_END);
+        this.revalidate();
+        this.repaint();
 
     }
 
@@ -184,17 +196,17 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
 
         if (grito.equals("BUSCAR")) {
             documento = txtDocumento.getText();
-            String reserva = ventanaPadre.VerReserva(documento);
-            if (reserva == null || reserva.equals("")) {
-                System.out.println("" + reserva);
+            HashMap<String, ArrayList<Servicio>> serviciosConsumidosPorNombreHuesped = ventanaPadre
+                    .HacerCheckOut(documento, true);
+            if (serviciosConsumidosPorNombreHuesped == null || serviciosConsumidosPorNombreHuesped.size() == 0) {
                 JOptionPane.showMessageDialog(ventanaPadre,
                         "No se encontró ninguna reserva bajo el documento " + documento + ".");
                 return;
             }
-            System.out.println(reserva);
+            System.out.println(serviciosConsumidosPorNombreHuesped);
 
             // Update info de las reservas
-            updateReservationInfo(reserva);
+            updateCheckoutInfo(serviciosConsumidosPorNombreHuesped);
 
         } else if (grito.equals("CONFIRMAR")) {
             documento = txtDocumento.getText();
