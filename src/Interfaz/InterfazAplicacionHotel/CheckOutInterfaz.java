@@ -173,6 +173,8 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
         for (String nombreHuesped : serviciosConsumidosPorNombreHuesped.keySet()) {
             ArrayList<Servicio> serviciosConsumidos = serviciosConsumidosPorNombreHuesped.get(nombreHuesped);
             for (Servicio servicio : serviciosConsumidos) {
+                total = 0.0;
+                servicios = "";
                 servicios += servicio.getNombre() + " " + servicio.getPrecio() + "\n";
                 total += servicio.getPrecio();
             }
@@ -197,7 +199,7 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
         if (grito.equals("BUSCAR")) {
             documento = txtDocumento.getText();
             HashMap<String, ArrayList<Servicio>> serviciosConsumidosPorNombreHuesped = ventanaPadre
-                    .HacerCheckOut(documento, true);
+                    .HacerCheckOut(documento, false);
             if (serviciosConsumidosPorNombreHuesped == null || serviciosConsumidosPorNombreHuesped.size() == 0) {
                 JOptionPane.showMessageDialog(ventanaPadre,
                         "No se encontró ninguna reserva bajo el documento " + documento + ".");
