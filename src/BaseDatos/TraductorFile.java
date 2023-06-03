@@ -169,7 +169,6 @@ public class TraductorFile {
         
         HashMap<String, Huesped> huespedes = new HashMap<String, Huesped>();
         HashMap<String, Reserva> reservas = new HashMap<String, Reserva>();
-        
         try {
             for (final File sHuespedFile : datosServiciosHuespedesFolder.listFiles()) {
                 scannerLectura = new Scanner(sHuespedFile);
