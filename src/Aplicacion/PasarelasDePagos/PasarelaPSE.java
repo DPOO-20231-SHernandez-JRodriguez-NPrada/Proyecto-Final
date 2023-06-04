@@ -16,14 +16,11 @@ public class PasarelaPSE implements PasarelaDePagos {
     public Boolean procesarPago(TarjetaDeCredito tarjetaDeCredito, Double monto) {
         // Si la tarjeta es válida, tiene cupo suficiente y no está reportada, se
         // procesa el pago
+        boolean valida = validarTarjeta(tarjetaDeCredito);
+        boolean tieneCupo = validarCupo(tarjetaDeCredito, monto);
+        boolean noReportada = !validarReportada(tarjetaDeCredito);
 
-        if (validarTarjeta(tarjetaDeCredito) && validarCupo(tarjetaDeCredito, monto)
-                && !validarReportada(tarjetaDeCredito)) {
-            return true;
-        } else {
-            return false;
-
-        }
+        return valida && tieneCupo && noReportada;
     }
 
     @Override

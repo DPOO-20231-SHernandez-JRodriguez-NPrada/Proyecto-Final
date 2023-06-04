@@ -17,13 +17,11 @@ public class PasarelaPayU implements PasarelaDePagos {
         // Si la tarjeta es válida, tiene cupo suficiente y no está reportada, se
         // procesa el pago
 
-        if (validarTarjeta(tarjetaDeCredito) && validarCupo(tarjetaDeCredito, monto)
-                && !validarReportada(tarjetaDeCredito)) {
-            return true;
-        } else {
-            return false;
+        boolean valida = validarTarjeta(tarjetaDeCredito);
+        boolean tieneCupo = validarCupo(tarjetaDeCredito, monto);
+        boolean noReportada = !validarReportada(tarjetaDeCredito);
 
-        }
+        return valida && tieneCupo && noReportada;
     }
 
     @Override

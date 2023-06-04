@@ -1,5 +1,6 @@
 package Interfaz.InterfazAplicacionHotel;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,6 +8,7 @@ import javax.swing.JFrame;
 
 import Aplicacion.EnrutadorPrincipal;
 import Aplicacion.Habitaciones.HabitacionBase;
+import Aplicacion.PasarelasDePagos.TarjetaDeCredito;
 import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.Servicio;
 import Interfaz.InterfazAplicacionHotel.ServiciosGUI.Interfazservicios;
@@ -285,8 +287,10 @@ public class InterfazPrincipalJFrame extends JFrame {
         return enrutadorPrincipal.getOcupacionHotel();
     }
 
-    public Boolean hacerPago(Reserva reserva) {
-        return enrutadorPrincipal.hacerPago(reserva);
+    public Boolean hacerPago(Double valorAPagar, TarjetaDeCredito tarjetaDeCredito, String nombreClasePasarela)
+            throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+            NoSuchMethodException, SecurityException, ClassNotFoundException {
+        return enrutadorPrincipal.hacerPago(valorAPagar, tarjetaDeCredito, nombreClasePasarela);
     }
 
     public void salirPrograma() {
