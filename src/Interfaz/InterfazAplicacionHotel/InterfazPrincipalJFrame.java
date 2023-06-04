@@ -32,6 +32,7 @@ public class InterfazPrincipalJFrame extends JFrame {
     private RestauranteInterfaz restaurante;
     private ConsultarOcupacion consultarOcupacion;
     private OpcionesDePago opcionesPago;
+    private PasarelaInterfaz pasarelainterfaz;
 
     private EnrutadorPrincipal enrutadorPrincipal;
 
@@ -48,6 +49,8 @@ public class InterfazPrincipalJFrame extends JFrame {
         this.cambiarTarifa = new Interfaztarifas(this);
         this.restaurante = new RestauranteInterfaz(this);
         this.consultarOcupacion = new ConsultarOcupacion(this);
+        this.opcionesPago = new OpcionesDePago(this);
+        this.pasarelainterfaz = new PasarelaInterfaz(this);
 
         setTitle("SISTEMA HOTEL DPOO");
         setSize(800, 600);
@@ -211,6 +214,13 @@ public class InterfazPrincipalJFrame extends JFrame {
     public void IrAlPanelOpcionesDePago() {
         getContentPane().removeAll();
         add(opcionesPago);
+        repaint();
+        revalidate();
+    }
+
+    public void IrAlPanelPago() {
+        getContentPane().removeAll();
+        add(pasarelainterfaz);
         repaint();
         revalidate();
     }

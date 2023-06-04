@@ -34,12 +34,13 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
     private JPanel searchPanel, checkOutPanel, buttonPanel;
     private JLabel lbDocumento, lbTitle;
     private JTextField txtDocumento;
-    private JButton btnBuscar, btnSalir, btnConfirmarSalida;
+    private JButton btnBuscar, btnSalir, btnConfirmarSalida, btnPagar;
     private String documento;
     private Reserva reserva;
     private Font fuente;
     private Border vacio;
     private boolean pagado = false;
+    private boolean permitirpag = false;
 
     public CheckOutInterfaz(InterfazPrincipalJFrame interfazPrincipalJFrame) {
         // Empty info
@@ -140,7 +141,7 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
 
     public JPanel getButtonPanel() {
         buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(1, 2));
+        buttonPanel.setLayout(new GridLayout(1, 3));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Buttons
@@ -162,10 +163,20 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
         btnConfirmarSalida.addActionListener(this);
         btnConfirmarSalida.setActionCommand("CONFIRMAR");
 
+        btnPagar = new JButton("Pagar");
+        btnPagar.setPreferredSize(new Dimension(200, 45));
+        btnPagar.setBackground(Color.BLACK);
+        // btnConfirmarSalida.setForeground(Color.WHITE);
+        btnPagar.setFont(fuente);
+        btnPagar.setMaximumSize(new Dimension(200, 200));
+        btnPagar.addActionListener(this);
+        btnPagar.setActionCommand("PAGAR");
+
         // Añadir elementos al panel
 
         buttonPanel.add(btnSalir);
         buttonPanel.add(btnConfirmarSalida);
+        buttonPanel.add(btnPagar);
 
         return buttonPanel;
     }
@@ -209,16 +220,18 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
             if (reserva == null) {
                 JOptionPane.showMessageDialog(ventanaPadre,
                         "No se encontró ninguna reserva bajo el documento " + documento + ".");
+                        permitirpag = false;
                 return;
             }
             HashMap<String, ArrayList<Servicio>> serviciosConsumidosPorNombreHuesped = ventanaPadre
                     .HacerCheckOut(documento, false);
             updateCheckoutInfo(serviciosConsumidosPorNombreHuesped);
             System.out.println(serviciosConsumidosPorNombreHuesped);
-
+            permitirpag = true;
             if (pagado) {
                 JOptionPane.showMessageDialog(ventanaPadre,
                         "Su consumo se encuentra pago, ya se hizo el checkout de este documento.");
+                        permitirpag = false;
                 return;
             }
             // Update info de las reservas
@@ -231,8 +244,19 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(ventanaPadre,
                     "Se ha registrado la salida de la reserva bajo el documento " + documento + ".");
 
-        } else if (grito.equals("PAGAR")) {
-            ventanaPadre.IrAlPanelOpcionesDePago();
+        } 
+        else if (grito.equals("PAGAR")) 
+        {   
+            if(permitirpag == true)
+            {
+                ventanaPadre.IrAlPanelOpcionesDePago();
+                permitirpag = false;
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(ventanaPadre,"Pago no disponible");
+            }
+
         }
 
         else if (grito.equals("SALIR")) {
