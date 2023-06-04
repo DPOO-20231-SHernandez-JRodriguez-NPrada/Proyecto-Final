@@ -2,6 +2,16 @@ package Aplicacion.PasarelasDePagos;
 
 public class PasarelaPSE implements PasarelaDePagos {
 
+    private String nombrePasarela;
+
+    PasarelaPSE() {
+        this.nombrePasarela = "PSE";
+    }
+
+    public String getNombrePasarela() {
+        return nombrePasarela;
+    }
+
     @Override
     public Boolean procesarPago(TarjetaDeCredito tarjetaDeCredito, Double monto) {
         // Si la tarjeta es válida, tiene cupo suficiente y no está reportada, se
