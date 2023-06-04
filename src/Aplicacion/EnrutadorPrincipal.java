@@ -7,6 +7,7 @@ import Aplicacion.Habitaciones.AdministradorHabitaciones;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Huespedes.AdministradorHuespedes;
 import Aplicacion.Huespedes.Huesped;
+import Aplicacion.PasarelasDePagos.PasarelaDePagos;
 import Aplicacion.Reservas.AdministradorReservas;
 import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.AdministradorServicios;
@@ -32,6 +33,7 @@ public class EnrutadorPrincipal {
     private AdministradorServicios adminServicios;
     private AdministradorHabitaciones adminHabitaciones;
     private ChekInOut checkInOut;
+    private PasarelaDePagos pasarelaDePagos;
 
     public EnrutadorPrincipal() {
         this.controladorBD = new ControladorBaseDatos();
@@ -211,5 +213,9 @@ public class EnrutadorPrincipal {
 
     public Boolean hacerPago(Reserva reserva) {
         return checkInOut.hacerPago(reserva);
+    }
+
+    public Boolean procesarPago(Tarifa tarifa, Double monto) {
+
     }
 }
