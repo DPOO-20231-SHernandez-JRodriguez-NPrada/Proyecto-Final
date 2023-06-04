@@ -142,10 +142,9 @@ public class EnrutadorPrincipal {
             adminHuespedes.AñadirServicio(documento, servicio, descripcion, fecha, pagado, precio);
         }
     }
-    
-    public double precioProducto(String nombre, String cantidad)
-    {
-        double precio = adminServicios.precioProducto(nombre,cantidad);
+
+    public double precioProducto(String nombre, String cantidad) {
+        double precio = adminServicios.precioProducto(nombre, cantidad);
         return precio;
     }
 
@@ -206,7 +205,11 @@ public class EnrutadorPrincipal {
         controladorBD.GuardarPrograma();
     }
 
-    public Reserva ConseguirReserva(String documento){
+    public Reserva ConseguirReserva(String documento) {
         return adminReservas.getReserva(documento);
+    }
+
+    public Boolean hacerPago(Reserva reserva) {
+        return checkInOut.hacerPago(reserva);
     }
 }

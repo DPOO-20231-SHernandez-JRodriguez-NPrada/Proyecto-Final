@@ -23,6 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.Servicio;
 
 public class CheckOutInterfaz extends JPanel implements ActionListener {
@@ -35,8 +36,10 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
     private JTextField txtDocumento;
     private JButton btnBuscar, btnSalir, btnConfirmarSalida;
     private String documento;
+    private Reserva reserva;
     private Font fuente;
     private Border vacio;
+    private boolean pagado = false;
 
     public CheckOutInterfaz(InterfazPrincipalJFrame interfazPrincipalJFrame) {
         // Empty info
@@ -197,18 +200,29 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
         String grito = e.getActionCommand();
 
         if (grito.equals("BUSCAR")) {
+            // Revisa si la reserva existe y si no, muestra un mensaje de error
+
+            // lista los servicios si todoPago es true,
             documento = txtDocumento.getText();
-            HashMap<String, ArrayList<Servicio>> serviciosConsumidosPorNombreHuesped = ventanaPadre
-                    .HacerCheckOut(documento, false);
-            if (serviciosConsumidosPorNombreHuesped == null || serviciosConsumidosPorNombreHuesped.size() == 0) {
+            reserva = ventanaPadre.ConseguirReserva(documento);
+
+            if (reserva == null) {
                 JOptionPane.showMessageDialog(ventanaPadre,
                         "No se encontró ninguna reserva bajo el documento " + documento + ".");
                 return;
             }
+            HashMap<String, ArrayList<Servicio>> serviciosConsumidosPorNombreHuesped = ventanaPadre
+                    .HacerCheckOut(documento, false);
+            updateCheckoutInfo(serviciosConsumidosPorNombreHuesped);
             System.out.println(serviciosConsumidosPorNombreHuesped);
 
+            if (pagado) {
+                JOptionPane.showMessageDialog(ventanaPadre,
+                        "Su consumo se encuentra pago, ya se hizo el checkout de este documento.");
+                return;
+            }
             // Update info de las reservas
-            updateCheckoutInfo(serviciosConsumidosPorNombreHuesped);
+            // TODO pagado = ventanaPadre.hacerPago(reserva));
 
         } else if (grito.equals("CONFIRMAR")) {
             documento = txtDocumento.getText();
@@ -217,7 +231,11 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(ventanaPadre,
                     "Se ha registrado la salida de la reserva bajo el documento " + documento + ".");
 
-        } else if (grito.equals("SALIR")) {
+        } else if (grito.equals("PAGAR")) {
+            ventanaPadre.IrAlPanelOpcionesDePago();
+        }
+
+        else if (grito.equals("SALIR")) {
             // this.removeAll();
 
             ventanaPadre.IrAPanelConsolaMenu();

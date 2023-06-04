@@ -12,7 +12,6 @@ import Aplicacion.Servicios.Servicio;
 import Interfaz.InterfazAplicacionHotel.ServiciosGUI.Interfazservicios;
 import Interfaz.InterfazAplicacionHotel.TarifasGUI.Interfaztarifas;
 
-
 /**
  * InterfazPrincipal
  * 
@@ -32,6 +31,7 @@ public class InterfazPrincipalJFrame extends JFrame {
     private Interfaztarifas cambiarTarifa;
     private RestauranteInterfaz restaurante;
     private ConsultarOcupacion consultarOcupacion;
+    private OpcionesDePago opcionesPago;
 
     private EnrutadorPrincipal enrutadorPrincipal;
 
@@ -152,8 +152,8 @@ public class InterfazPrincipalJFrame extends JFrame {
 
     public void IrAPanelCrearReserva() {
         getContentPane().removeAll();
-        //TODO
-        //this.setSize(WIDTH, HEIGHT);
+        // TODO
+        // this.setSize(WIDTH, HEIGHT);
         add(crearReserva);
         repaint();
         revalidate();
@@ -208,10 +208,16 @@ public class InterfazPrincipalJFrame extends JFrame {
         revalidate();
     }
 
-    public Reserva ConseguirReserva(String documento){
-        return enrutadorPrincipal.ConseguirReserva(documento);
+    public void IrAlPanelOpcionesDePago() {
+        getContentPane().removeAll();
+        add(opcionesPago);
+        repaint();
+        revalidate();
     }
 
+    public Reserva ConseguirReserva(String documento) {
+        return enrutadorPrincipal.ConseguirReserva(documento);
+    }
 
     /*
      * IniciarAplicacion
@@ -220,7 +226,7 @@ public class InterfazPrincipalJFrame extends JFrame {
      * este, dependiendo del tipo de consola que se haya establecido
      */
     private void IniciarAplicacion() {
-       
+
     }
 
     public EnrutadorPrincipal getEP() {
@@ -253,8 +259,7 @@ public class InterfazPrincipalJFrame extends JFrame {
         return resultado;
     }
 
-    public double precioProducto(String producto, String cantidad) 
-    {
+    public double precioProducto(String producto, String cantidad) {
         return enrutadorPrincipal.precioProducto(producto, cantidad);
     }
 
@@ -278,6 +283,10 @@ public class InterfazPrincipalJFrame extends JFrame {
 
     public HashMap<String, Boolean[]> getOcupacionHotel() {
         return enrutadorPrincipal.getOcupacionHotel();
+    }
+
+    public Boolean hacerPago(Reserva reserva) {
+        return enrutadorPrincipal.hacerPago(reserva);
     }
 
     public void salirPrograma() {

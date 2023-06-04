@@ -13,7 +13,7 @@ public class ChekInOut {
 
     public ChekInOut() {
     }
-    
+
     public void CheckIn(Reserva reserva, Huesped huesped) {
         ArrayList<Huesped> grupo = reserva.getGrupo();
         reserva.setEstadoReserva("checked");
@@ -22,14 +22,14 @@ public class ChekInOut {
 
     public HashMap<String, ArrayList<Servicio>> CheckOut(Reserva reserva, boolean confirmarPago) {
         HashMap<String, ArrayList<Servicio>> serviciosPorPagar = new HashMap<String, ArrayList<Servicio>>();
-        if(!confirmarPago)
-        {
+
+        if (!confirmarPago) {
             ArrayList<Huesped> grupo = reserva.getGrupo();
             for (Huesped huesped : grupo) {
                 ArrayList<Servicio> servicios = new ArrayList<Servicio>();
                 ArrayList<Servicio> huespedServicios = huesped.getServicios();
                 for (Servicio servicioPosible : huespedServicios) {
-                    if(!servicioPosible.isPagado()){
+                    if (!servicioPosible.isPagado()) {
                         servicios.add(servicioPosible);
                     }
                 }
@@ -39,32 +39,17 @@ public class ChekInOut {
         return serviciosPorPagar;
     }
 
-    public boolean todoPago(HashMap<String, ArrayList<Servicio>> serviciosPorPagar, Reserva reserva)
-    {
-        boolean Pagado = true;
-
+    public boolean hacerPago(Reserva reserva) {
         ArrayList<Huesped> grupo = reserva.getGrupo();
-        while(Pagado == true)
-        {
-            for (Huesped huesped : grupo) 
-            {
-                ArrayList<Servicio> huespedServicios = huesped.getServicios();
-                for (Servicio servicioPosible : huespedServicios) 
-                {
-                    if(!servicioPosible.isPagado()){
-                        Pagado = false;
-                    }
+        for (Huesped huesped : grupo) {
+            ArrayList<Servicio> huespedServicios = huesped.getServicios();
+            for (Servicio servicioPosible : huespedServicios) {
+                if (!servicioPosible.isPagado()) {
+                    servicioPosible.setPagado(true);
                 }
             }
         }
-        if(Pagado == true)
-        {
-            reserva.setEstadoReserva("terminado");
-            
-        }
-
-        return Pagado;
+        return true;
     }
-    
 
 }
