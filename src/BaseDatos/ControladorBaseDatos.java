@@ -18,8 +18,8 @@ public class ControladorBaseDatos {
     private TraductorFile traductor;
     private TraductorObject traductorObject;
 
-    private HashMap<String,Reserva> datosReservas;
-    private HashMap<String,Huesped> datosHuespedes;
+    private HashMap<String, Reserva> datosReservas;
+    private HashMap<String, Huesped> datosHuespedes;
     private ArrayList<Tarifa> datosTarifas;
     private HashMap<String, ArrayList<Factura>> datosFacturas;
 
@@ -37,77 +37,74 @@ public class ControladorBaseDatos {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 
-    private HashMap<String, String> CargarDatosLogin() throws IOException{
-        File datosLoginFile = new File("Entrega 2/Data/Usuarios.csv");
+    private HashMap<String, String> CargarDatosLogin() throws IOException {
+        File datosLoginFile = new File("Data/Usuarios.csv");
         if (datosLoginFile.exists()) {
             return traductor.TraducirDatosLoginFile(datosLoginFile);
-        }
-        else{
+        } else {
             return null;
         }
     }
 
-    private void CargarDatosReservasYHuespedes() throws IOException{
-        
-        File datosServiciosHabitacionesFolder = new File("Entrega 2/Data/Reservas/HabitacionesReservaServicios");
-        File datosServiciosHuespedesFolder = new File("Entrega 2/Data/Reservas/HuespedesServicios");
-        File datosReservasYHuespedesFile = new File("Entrega 2/Data/Reservas/Reservas.csv");
-        
-        traductor.TraducirReservasYHuespedes(datosServiciosHabitacionesFolder, datosServiciosHuespedesFolder, datosReservasYHuespedesFile);
+    private void CargarDatosReservasYHuespedes() throws IOException {
+
+        File datosServiciosHabitacionesFolder = new File("Data/Reservas/HabitacionesReservaServicios");
+        File datosServiciosHuespedesFolder = new File("Data/Reservas/HuespedesServicios");
+        File datosReservasYHuespedesFile = new File("Data/Reservas/Reservas.csv");
+
+        traductor.TraducirReservasYHuespedes(datosServiciosHabitacionesFolder, datosServiciosHuespedesFolder,
+                datosReservasYHuespedesFile);
 
         this.datosReservas = traductor.ConseguirReservas();
         this.datosHuespedes = traductor.ConseguirHuespedes();
     }
 
     private ArrayList<ServicioBase> CargarServiciosBase() throws IOException {
-        File serviciosBaseFile = new File("Entrega 2/Data/ServiciosBase.csv");
+        File serviciosBaseFile = new File("Data/ServiciosBase.csv");
         if (serviciosBaseFile.exists()) {
             return traductor.TraducirServiciosBaseFile(serviciosBaseFile);
-        }
-        else{
+        } else {
             return null;
         }
     }
 
     private HashMap<String, HabitacionBase> CargarHabitacionesBase() throws IOException {
-        File habitacionesBaseFile = new File("Entrega 2/Data/HabitacionesBase.csv");
-        File ocupacionHabitacionesFile = new File("Entrega 2/Data/OcupacionHabitaciones.csv");
+        File habitacionesBaseFile = new File("Data/HabitacionesBase.csv");
+        File ocupacionHabitacionesFile = new File("Data/OcupacionHabitaciones.csv");
         if (habitacionesBaseFile.exists()) {
             return traductor.TraducirHabitacionesBaseFile(habitacionesBaseFile, ocupacionHabitacionesFile);
-        }
-        else{
+        } else {
             return null;
         }
     }
 
     private void CargarDatosTarifas() {
-        
-        File datosTarifasFolder = new File("Entrega 2/Data/Tarifas");
-        
+
+        File datosTarifasFolder = new File("Data/Tarifas");
+
         this.datosTarifas = traductor.TraducirTarifas(datosTarifasFolder);
     }
 
-    private ArrayList<Producto> CargarMenu() throws IOException{
-        File menuFile = new File("Entrega 2/Data/Menu.csv");
+    private ArrayList<Producto> CargarMenu() throws IOException {
+        File menuFile = new File("Data/Menu.csv");
         if (menuFile.exists()) {
             return traductor.TraducirMenuFile(menuFile);
-        }
-        else{
+        } else {
             return null;
         }
     }
 
-    private void CargarDatosFacturas() throws IOException{
-        File datosFacturasFolder = new File("Entrega 2/Data/Facturas");
+    private void CargarDatosFacturas() throws IOException {
+        File datosFacturasFolder = new File("Data/Facturas");
 
         this.datosFacturas = traductor.TraducirFacturas(datosFacturasFolder);
     }
 
-    //Metodos Getters
-    
+    // Metodos Getters
+
     public HashMap<String, String> ConseguirDatosLogin() {
         try {
             return CargarDatosLogin();
@@ -129,9 +126,8 @@ public class ControladorBaseDatos {
             return null;
         }
 
-        
     }
-    
+
     public HashMap<String, HabitacionBase> ConseguirHabitacionesBase() {
         try {
             return CargarHabitacionesBase();
@@ -162,8 +158,7 @@ public class ControladorBaseDatos {
         return this.datosFacturas;
     }
 
-    public void GuardarPrograma()
-    {
+    public void GuardarPrograma() {
         traductorObject.GuardarReservasHuespedesServicios(datosReservas);
         traductorObject.GuardarTarifas(datosTarifas);
         traductorObject.GuardarFacturas(datosFacturas);
