@@ -37,6 +37,7 @@ public class EnrutadorPrincipal {
     private AdministradorHabitaciones adminHabitaciones;
     private AdministradorPagos adminPago;
     private ChekInOut checkInOut;
+    private GeneradorReportes generadorReportes;
 
     public EnrutadorPrincipal() {
         this.controladorBD = new ControladorBaseDatos();
@@ -49,7 +50,7 @@ public class EnrutadorPrincipal {
         this.adminServicios = new AdministradorServicios();
         this.adminHabitaciones = new AdministradorHabitaciones();
         this.checkInOut = new ChekInOut();
-
+        this.generadorReportes = new GeneradorReportes();
     }
 
     /*
@@ -79,6 +80,12 @@ public class EnrutadorPrincipal {
     private void CargarDatosReservas() {
         HashMap<String, Reserva> datosReservas = controladorBD.ConseguirDatosReservas();
         adminReservas.AsignarDatosReserva(datosReservas);
+        ArrayList<Reserva> reservas = new ArrayList<>(datosReservas.values()) ;
+        ArrayList<String> fechas = new ArrayList<>();
+        for (Reserva r : reservas){
+            fechas.add(r.getFechaIni());
+        }
+        generadorReportes.setFechas(fechas);
     }
 
     private void CargarDatosServiciosBase() {
@@ -99,11 +106,13 @@ public class EnrutadorPrincipal {
     private void CargarDatosTarifas() {
         ArrayList<Tarifa> datosTarifas = controladorBD.ConseguirDatosTarifas();
         adminTarifas.AsignarTarifas(datosTarifas);
+        generadorReportes.setPrecios(datosTarifas.get(0).getEstandar());
     }
 
     private void CargarDatosMenu() {
         ArrayList<Producto> menuProductos = controladorBD.ConseguirMenu();
         adminServicios.AsignarMenu(menuProductos);
+        generadorReportes.setMenu(menuProductos);
     }
 
     private void CargarDatosFacturas() {
@@ -226,4 +235,7 @@ public class EnrutadorPrincipal {
         return tarjeta;
     }
 
+    public void generarReportes(){
+        this.generadorReportes.generarReportes();
+    }
 }
