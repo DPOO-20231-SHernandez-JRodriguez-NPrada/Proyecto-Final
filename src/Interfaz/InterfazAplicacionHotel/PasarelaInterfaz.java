@@ -108,9 +108,6 @@ public class PasarelaInterfaz extends JPanel implements ActionListener
                 TarjetaDeCredito tarjeta = interfazpadre.crearTarjetaDeCredito(numerotarTxt.getText(),nombreTxt.getText(),codigosegTxt.getText());
                 Double total = interfazpadre.valorapagar();
                 String direccion = interfazpadre.direccion();
-                System.out.println(total);
-                System.out.println(direccion);
-                System.out.println(tarjeta);
                 try {
                     interfazpadre.hacerPago(total, tarjeta, direccion);
                 } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
