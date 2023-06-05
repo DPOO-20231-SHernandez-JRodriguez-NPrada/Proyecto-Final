@@ -24,23 +24,23 @@ public class TraductorObject {
         try {
             Set<String> llavesMapa = mapaReservas.keySet();
 
-            File archivoViejoReservas = new File("Entrega 2/Data/Reservas/Reservas.csv");
+            File archivoViejoReservas = new File("Data/Reservas/Reservas.csv");
             boolean eliminadoReservas = Files.deleteIfExists(archivoViejoReservas.toPath());
 
-            File folderViejoServiciosHuespedes = new File("Entrega 2/Data/Reservas/HuespedesServicios");
+            File folderViejoServiciosHuespedes = new File("Data/Reservas/HuespedesServicios");
 
             for (final File sHuespedFile : folderViejoServiciosHuespedes.listFiles()) {
                 Files.deleteIfExists(sHuespedFile.toPath());
             }
 
-            File folderViejoServiciosHabitaciones = new File("Entrega 2/Data/Reservas/HabitacionesReservaServicios");
+            File folderViejoServiciosHabitaciones = new File("Data/Reservas/HabitacionesReservaServicios");
 
             for (final File sHabitacionFile : folderViejoServiciosHabitaciones.listFiles()) {
                 Files.deleteIfExists(sHabitacionFile.toPath());
             }
 
                 if(eliminadoReservas){
-                    File archivoReservas =  new File("Entrega 2/Data/Reservas/Reservas.csv");
+                    File archivoReservas =  new File("Data/Reservas/Reservas.csv");
                     archivoReservas.createNewFile();
                     FileWriter myWriterReservas = new FileWriter(archivoReservas);
 
@@ -66,7 +66,7 @@ public class TraductorObject {
                             /*Se cambio de string a int */
                             String numeroCelularHuesped = huesped.getCelular();
 
-                            File archivoServiciosHuesped =  new File("Entrega 2/Data/Reservas/HuespedesServicios"+documentoHuesped+"_"+nombreHuesped+".csv");
+                            File archivoServiciosHuesped =  new File("Data/Reservas/HuespedesServicios"+documentoHuesped+"_"+nombreHuesped+".csv");
                             archivoServiciosHuesped.createNewFile();
 
                             FileWriter myWriterServiciosHuesped = new FileWriter(archivoServiciosHuesped);
@@ -94,7 +94,7 @@ public class TraductorObject {
 
                             String idHabitacionCortada = idHabitacion.replace(".", "");
 
-                            File archivoServiciosHabitacion =  new File("Entrega 2/Data/Reservas/HabitacionesReservaServicios"+idHabitacionCortada+"_"+reserva.getDocumento()+".csv");
+                            File archivoServiciosHabitacion =  new File("Data/Reservas/HabitacionesReservaServicios"+idHabitacionCortada+"_"+reserva.getDocumento()+".csv");
                             archivoServiciosHabitacion.createNewFile();
 
                             FileWriter myWriterServiciosHabitacion = new FileWriter(archivoServiciosHabitacion);
@@ -127,7 +127,7 @@ public class TraductorObject {
 
     public void GuardarTarifas(ArrayList<Tarifa> listaTarifas) {
         try {
-            File folderViejoTarifas = new File("Entrega 2/Data/Tarifas");
+            File folderViejoTarifas = new File("Data/Tarifas");
 
             for (final File tarifaFile : folderViejoTarifas.listFiles()) {
                 Files.deleteIfExists(tarifaFile.toPath());
@@ -143,7 +143,7 @@ public class TraductorObject {
                 String suiteString = "";
                 String dobleString = "";
 
-                File archivoTarifa =  new File("Entrega 2/Data/Tarifas/Tarifa"+"_"+anio+".csv");
+                File archivoTarifa =  new File("Data/Tarifas/Tarifa"+"_"+anio+".csv");
                 archivoTarifa.createNewFile();
 
                 FileWriter myWriterTarifa = new FileWriter(archivoTarifa);
@@ -172,6 +172,33 @@ public class TraductorObject {
 
     public void GuardarFacturas(HashMap<String, ArrayList<Factura>> mapaFacturas){
 
+    }
+
+    public void GuardarDatosLoginClientes(HashMap<String, String> datosLoginClientes) {
+        try {
+            File archivoViejoLoginClientes = new File("Data/Login/LoginClientes.csv");
+            boolean eliminadoLoginClientes = Files.deleteIfExists(archivoViejoLoginClientes.toPath());
+
+            if(eliminadoLoginClientes){
+                File archivoLoginClientes =  new File("Data/Login/LoginClientes.csv");
+                archivoLoginClientes.createNewFile();
+                FileWriter myWriterLoginClientes = new FileWriter(archivoLoginClientes);
+
+                myWriterLoginClientes.write("usuario,contrasenia\n");
+
+                Set<String> llavesMapa = datosLoginClientes.keySet();
+
+                for (String llave : llavesMapa) {
+                    String contrasenia = datosLoginClientes.get(llave);
+                    myWriterLoginClientes.write(llave+","+contrasenia+"\n");
+                }
+
+                myWriterLoginClientes.close();
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

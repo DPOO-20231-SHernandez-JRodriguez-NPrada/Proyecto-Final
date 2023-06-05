@@ -163,4 +163,7 @@ public class AdministradorHabitaciones {
         return ocupados;
     }
 
+    public HabitacionBase BuscarHabitacionBase(String idHabitacionBase) {
+        return this.hashHabitaciones.get(idHabitacionBase);
+    }
 }

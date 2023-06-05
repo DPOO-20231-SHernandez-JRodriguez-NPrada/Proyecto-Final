@@ -1,6 +1,7 @@
 package Aplicacion;
 
 import java.lang.reflect.InvocationTargetException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,6 +39,7 @@ public class EnrutadorPrincipal {
     private AdministradorPagos adminPago;
     private ChekInOut checkInOut;
     private GeneradorReportes generadorReportes;
+    private CaracteristicasHotel caracteristicasHotel;
 
     public EnrutadorPrincipal() {
         this.controladorBD = new ControladorBaseDatos();
@@ -70,11 +72,13 @@ public class EnrutadorPrincipal {
         CargarDatosTarifas();
         CargarDatosMenu();
         CargarDatosFacturas();
+        CargarCaracteristicasHotel();
     }
 
     private void CargarDatosLogin() {
         HashMap<String, String> datosLogin = controladorBD.ConseguirDatosLogin();
-        adminLogin.AsignarDatos(datosLogin);
+        HashMap<String, String> datosLoginClientes = controladorBD.ConseguirDatosLoginClientes();
+        adminLogin.AsignarDatos(datosLogin, datosLoginClientes);
     }
 
     private void CargarDatosReservas() {
@@ -118,6 +122,14 @@ public class EnrutadorPrincipal {
     private void CargarDatosFacturas() {
         HashMap<String, ArrayList<Factura>> datosFacturas = controladorBD.ConseguirDatosFacturas();
         adminFacturas.AsignarFacturas(datosFacturas);
+    }
+
+    private void CargarCaracteristicasHotel(){
+        try {
+            caracteristicasHotel = controladorBD.CargarCaracteristicasHotel();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public String ComprobarLogin(String usuario, String contrasenia) {
@@ -167,10 +179,6 @@ public class EnrutadorPrincipal {
         Huesped huesped = adminHuespedes.crearHuesped(nombre, documento, correo, celular);
         Reserva reserva = adminReservas.getReserva(documentoPrincipal);
         checkInOut.CheckIn(reserva, huesped);
-    }
-
-    public void HacerCheckout() {
-
     }
 
     public ArrayList<HabitacionBase> buscarHabitaciones(Boolean cocina, Boolean balcon, Boolean vista, String fechai,
@@ -238,4 +246,20 @@ public class EnrutadorPrincipal {
     public void generarReportes(){
         this.generadorReportes.generarReportes();
     }
+    public boolean ComprobarLoginUsuario(String usuario, String contrasenia) {
+        return adminLogin.ComprobarLoginCliente(usuario, contrasenia);
+    }
+
+    public boolean CrearUsuario(String usuario, String contrasenia) {
+        return adminLogin.CrearCuentaCliente(usuario, contrasenia);
+    }
+
+    public CaracteristicasHotel getCaracteristicasHotel() {
+        return caracteristicasHotel;
+    }
+
+    public HabitacionBase BuscarHabitacionBase(String idHabitacion) {
+        return adminHabitaciones.BuscarHabitacionBase(idHabitacion);
+    }
+
 }

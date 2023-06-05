@@ -1,4 +1,4 @@
-package Interfaz.InterfazAplicacionHotel;
+package Interfaz.InterfazAplicacionHuesped;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -27,10 +27,11 @@ import javax.swing.plaf.metal.MetalCheckBoxIcon;
 
 import Aplicacion.CaracteristicasHotel;
 import Aplicacion.Habitaciones.HabitacionBase;
+import Interfaz.InterfazAplicacionHotel.VerEspecificacionesHotelHabitacionJFrame;
 
-public class CrearReserva extends JPanel implements ActionListener{
+public class VerYReservarCuartosJPanel extends JPanel implements ActionListener{
 
-    private InterfazPrincipalJFrame ventanaPadre;
+    private InterfazprincipalHuespedJFrame ventanaPadre;
     
     private JPanel jpFiltros;
     private JLabel lbFFechaInicial, lbFFechaFinal, lbFAtributos, lbFTipoHabitacion;
@@ -63,7 +64,7 @@ public class CrearReserva extends JPanel implements ActionListener{
     java.util.Date fechaInicialBusqueda;
     private java.util.Date fechaFinalBusqueda;
 
-    public CrearReserva(InterfazPrincipalJFrame interfazPrincipalJFrame) {
+    public VerYReservarCuartosJPanel(InterfazprincipalHuespedJFrame interfazPrincipalJFrame) {
         
         this.ventanaPadre = interfazPrincipalJFrame;
         this.habitacionesDisponibles = new HashMap<String, HabitacionBase>();
@@ -450,7 +451,7 @@ public class CrearReserva extends JPanel implements ActionListener{
                 cancelarReserva();
                 break;
             case "SALIR":
-                ventanaPadre.IrAPanelConsolaMenu();
+                ventanaPadre.cambiarPanel("iniciarSesion");
                 break;
             case "ELIMINAR_HABITACION":
                 eliminarHabitacion();

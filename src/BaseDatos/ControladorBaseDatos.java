@@ -1,10 +1,12 @@
 package BaseDatos;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Aplicacion.CaracteristicasHotel;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Huespedes.Huesped;
 import Aplicacion.Reservas.Reserva;
@@ -22,6 +24,7 @@ public class ControladorBaseDatos {
     private HashMap<String, Huesped> datosHuespedes;
     private ArrayList<Tarifa> datosTarifas;
     private HashMap<String, ArrayList<Factura>> datosFacturas;
+    private HashMap<String, String> datosLoginClientes;
 
     public ControladorBaseDatos() {
         this.traductor = new TraductorFile();
@@ -32,15 +35,31 @@ public class ControladorBaseDatos {
     private void CargarDatosVariables() {
         try {
             CargarDatosReservasYHuespedes();
-            CargarDatosTarifas();
-            CargarDatosFacturas();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        try {
+            CargarDatosTarifas();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            CargarDatosFacturas();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            CargarDatosLoginClientes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private HashMap<String, String> CargarDatosLogin() throws IOException {
+    private HashMap<String, String> CargarDatosLogin() throws IOException{
         File datosLoginFile = new File("Data/Usuarios.csv");
         if (datosLoginFile.exists()) {
             return traductor.TraducirDatosLoginFile(datosLoginFile);
@@ -49,14 +68,23 @@ public class ControladorBaseDatos {
         }
     }
 
-    private void CargarDatosReservasYHuespedes() throws IOException {
+    private void CargarDatosLoginClientes() throws IOException{
+        File datosLoginFile = new File("Data/Clientes.csv");
+        if (datosLoginFile.exists()) {
+            this.datosLoginClientes = traductor.TraducirDatosLoginFile(datosLoginFile);
+        }
+        else{
+            this.datosLoginClientes = null;
+        }
+    }
 
+    private void CargarDatosReservasYHuespedes() throws IOException{
+        
         File datosServiciosHabitacionesFolder = new File("Data/Reservas/HabitacionesReservaServicios");
         File datosServiciosHuespedesFolder = new File("Data/Reservas/HuespedesServicios");
         File datosReservasYHuespedesFile = new File("Data/Reservas/Reservas.csv");
-
-        traductor.TraducirReservasYHuespedes(datosServiciosHabitacionesFolder, datosServiciosHuespedesFolder,
-                datosReservasYHuespedesFile);
+        
+        traductor.TraducirReservasYHuespedes(datosServiciosHabitacionesFolder, datosServiciosHuespedesFolder, datosReservasYHuespedesFile);
 
         this.datosReservas = traductor.ConseguirReservas();
         this.datosHuespedes = traductor.ConseguirHuespedes();
@@ -82,13 +110,13 @@ public class ControladorBaseDatos {
     }
 
     private void CargarDatosTarifas() {
-
+        
         File datosTarifasFolder = new File("Data/Tarifas");
-
+        
         this.datosTarifas = traductor.TraducirTarifas(datosTarifasFolder);
     }
 
-    private ArrayList<Producto> CargarMenu() throws IOException {
+    private ArrayList<Producto> CargarMenu() throws IOException{
         File menuFile = new File("Data/Menu.csv");
         if (menuFile.exists()) {
             return traductor.TraducirMenuFile(menuFile);
@@ -97,14 +125,20 @@ public class ControladorBaseDatos {
         }
     }
 
-    private void CargarDatosFacturas() throws IOException {
+    private void CargarDatosFacturas() throws IOException{
         File datosFacturasFolder = new File("Data/Facturas");
 
         this.datosFacturas = traductor.TraducirFacturas(datosFacturasFolder);
     }
 
-    // Metodos Getters
+    public CaracteristicasHotel CargarCaracteristicasHotel() throws FileNotFoundException {
+        File caracteristicasHotelFile = new File("Data/EspecificacionesHotel.csv");
+        
+        return traductor.TraducirCaracteristicasHotelFile(caracteristicasHotelFile);
+    }
 
+    //Metodos Getters
+    
     public HashMap<String, String> ConseguirDatosLogin() {
         try {
             return CargarDatosLogin();
@@ -112,6 +146,10 @@ public class ControladorBaseDatos {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public HashMap<String, String> ConseguirDatosLoginClientes() {
+        return this.datosLoginClientes;
     }
 
     public HashMap<String, Reserva> ConseguirDatosReservas() {
@@ -162,6 +200,7 @@ public class ControladorBaseDatos {
         traductorObject.GuardarReservasHuespedesServicios(datosReservas);
         traductorObject.GuardarTarifas(datosTarifas);
         traductorObject.GuardarFacturas(datosFacturas);
+        traductorObject.GuardarDatosLoginClientes(datosLoginClientes);
     }
 
     public static ArrayList<String> cantBotones() 
