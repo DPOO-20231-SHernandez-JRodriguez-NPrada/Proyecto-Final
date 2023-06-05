@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -110,7 +111,14 @@ public class PasarelaInterfaz extends JPanel implements ActionListener
                 System.out.println(total);
                 System.out.println(direccion);
                 System.out.println(tarjeta);
-                //interfazpadre.hacerPago(total, tarjeta, direccion)
+                try {
+                    interfazpadre.hacerPago(total, tarjeta, direccion);
+                } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                        | InvocationTargetException | NoSuchMethodException | SecurityException
+                        | ClassNotFoundException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         }
         else if(grito.equals("SALIR"))
