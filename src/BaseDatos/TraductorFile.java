@@ -147,8 +147,9 @@ public class TraductorFile {
                 String horaInicio = datos[2];
                 String HoraFin = datos[3];
                 boolean validoHabitacion = Boolean.parseBoolean(datos[4]);
+                int ventas = (int) Double.parseDouble(datos[5]);
 
-                Producto producto = new Producto(nombre, precio, horaInicio, HoraFin, validoHabitacion);
+                Producto producto = new Producto(nombre, precio, horaInicio, HoraFin, validoHabitacion,ventas);
 
                 menu.add(producto);
             }

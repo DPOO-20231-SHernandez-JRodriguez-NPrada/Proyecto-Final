@@ -7,15 +7,17 @@ public class Producto {
     public String horaIni; 
     public String horaFin; 
     public boolean validoHabitacion;
+    public int ventas;
 
 
     
-    public Producto(String nombre, double precio, String horaIni, String horaFin, boolean validoHabitacion) {
+    public Producto(String nombre, double precio, String horaIni, String horaFin, boolean validoHabitacion, int ventas) {
         this.nombre = nombre;
         this.precio = precio;
         this.horaIni = horaIni;
         this.horaFin = horaFin;
         this.validoHabitacion = validoHabitacion;
+        this.ventas = ventas;
     }
     
     public String getNombre() {
@@ -47,6 +49,13 @@ public class Producto {
     }
     public void setValidoHabitacion(boolean validoHabitacion) {
         this.validoHabitacion = validoHabitacion;
+    } 
+
+    public int getVentas() {
+        return ventas;
+    }
+    public void setVentas(int ventas) {
+        this.ventas = ventas;
     } 
 
 }

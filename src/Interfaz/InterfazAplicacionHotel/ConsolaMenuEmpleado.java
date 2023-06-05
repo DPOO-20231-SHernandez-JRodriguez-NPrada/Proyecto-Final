@@ -125,7 +125,7 @@ public class ConsolaMenuEmpleado extends JPanel implements ActionListener {
 			btnCambiarTarifa.addActionListener(this);
 			btnCambiarTarifa.setActionCommand("CAMBIAR_TARIFA");
 
-			btnOcupacion = new JButton("Consultar ocupacion");
+			btnOcupacion = new JButton("Generar Reportes");
 			btnOcupacion.setPreferredSize(tamanho);
 			btnOcupacion.setMaximumSize(tamanho);
 			btnOcupacion.setBackground(grisaceo);
@@ -168,6 +168,7 @@ public class ConsolaMenuEmpleado extends JPanel implements ActionListener {
 			ventanaPadre.IrAPanelCambiarTarifa();
 		} else if (grito.equals("CONSULTAR_OCUPACION")) {
 			ventanaPadre.IrAPanelConsultarOcupacion();
+			ventanaPadre.getEP().generarReportes();
 		} else if (grito.equals("SALIR")) {
 			ventanaPadre.IrAPanelLogin();
 		}
