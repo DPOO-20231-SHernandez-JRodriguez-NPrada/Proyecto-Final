@@ -3,6 +3,7 @@ package BaseDatos;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -406,5 +407,44 @@ public class TraductorFile {
 
         return nuevoMapaFacturas;
     }
+
+    public static ArrayList<String> cantBotones(File metodosPago) 
+    {
+        ArrayList<String> Cantbotones = new ArrayList<String>();
+        try 
+        {
+            Scanner lector = new Scanner(metodosPago);
+            while(lector.hasNextLine())
+            {
+                
+                String texto = lector.nextLine();
+                Cantbotones.add(texto);
+            }
+            lector.close();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Cantbotones;
+    }
     
+    public static ArrayList<String> nombrePasarela (File metodosPago) 
+    {
+        ArrayList<String> Cantbotones = new ArrayList<String>();
+        try 
+        {
+            Scanner lector = new Scanner(metodosPago);
+            while(lector.hasNextLine())
+            {
+                
+                String texto = lector.nextLine();
+                Cantbotones.add(texto);
+            }
+            lector.close();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Cantbotones;
+    }
 }

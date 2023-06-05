@@ -1,5 +1,6 @@
 package Interfaz.InterfazAplicacionHotel;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,11 +8,12 @@ import javax.swing.JFrame;
 
 import Aplicacion.EnrutadorPrincipal;
 import Aplicacion.Habitaciones.HabitacionBase;
+import Aplicacion.PasarelasDePagos.TarjetaDeCredito;
 import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.Servicio;
+import BaseDatos.ControladorBaseDatos;
 import Interfaz.InterfazAplicacionHotel.ServiciosGUI.Interfazservicios;
 import Interfaz.InterfazAplicacionHotel.TarifasGUI.Interfaztarifas;
-
 
 /**
  * InterfazPrincipal
@@ -32,12 +34,15 @@ public class InterfazPrincipalJFrame extends JFrame {
     private Interfaztarifas cambiarTarifa;
     private RestauranteInterfaz restaurante;
     private ConsultarOcupacion consultarOcupacion;
+    private OpcionesDePago opcionesPago;
+    private PasarelaInterfaz pasarelainterfaz;
 
     private EnrutadorPrincipal enrutadorPrincipal;
 
     public InterfazPrincipalJFrame() {
-        this.enrutadorPrincipal = new EnrutadorPrincipal();
 
+
+        this.enrutadorPrincipal = new EnrutadorPrincipal();
         this.informacionReservas = new InfromacionReservas(this);
         this.crearReserva = new CrearReserva(this);
         this.checkIn = new CheckInInterfaz(this);
@@ -48,6 +53,8 @@ public class InterfazPrincipalJFrame extends JFrame {
         this.cambiarTarifa = new Interfaztarifas(this);
         this.restaurante = new RestauranteInterfaz(this);
         this.consultarOcupacion = new ConsultarOcupacion(this);
+        this.opcionesPago = new OpcionesDePago(this);
+        this.pasarelainterfaz = new PasarelaInterfaz(this);
 
         setTitle("SISTEMA HOTEL DPOO");
         setSize(800, 600);
@@ -152,8 +159,8 @@ public class InterfazPrincipalJFrame extends JFrame {
 
     public void IrAPanelCrearReserva() {
         getContentPane().removeAll();
-        //TODO
-        //this.setSize(WIDTH, HEIGHT);
+        // TODO
+        // this.setSize(WIDTH, HEIGHT);
         add(crearReserva);
         repaint();
         revalidate();
@@ -208,10 +215,23 @@ public class InterfazPrincipalJFrame extends JFrame {
         revalidate();
     }
 
-    public Reserva ConseguirReserva(String documento){
-        return enrutadorPrincipal.ConseguirReserva(documento);
+    public void IrAlPanelOpcionesDePago() {
+        getContentPane().removeAll();
+        add(opcionesPago);
+        repaint();
+        revalidate();
     }
 
+    public void IrAlPanelPago() {
+        getContentPane().removeAll();
+        add(pasarelainterfaz);
+        repaint();
+        revalidate();
+    }
+
+    public Reserva ConseguirReserva(String documento) {
+        return enrutadorPrincipal.ConseguirReserva(documento);
+    }
 
     /*
      * IniciarAplicacion
@@ -220,7 +240,7 @@ public class InterfazPrincipalJFrame extends JFrame {
      * este, dependiendo del tipo de consola que se haya establecido
      */
     private void IniciarAplicacion() {
-       
+
     }
 
     public EnrutadorPrincipal getEP() {
@@ -253,8 +273,7 @@ public class InterfazPrincipalJFrame extends JFrame {
         return resultado;
     }
 
-    public double precioProducto(String producto, String cantidad) 
-    {
+    public double precioProducto(String producto, String cantidad) {
         return enrutadorPrincipal.precioProducto(producto, cantidad);
     }
 
@@ -280,8 +299,34 @@ public class InterfazPrincipalJFrame extends JFrame {
         return enrutadorPrincipal.getOcupacionHotel();
     }
 
+    public Boolean hacerPago(Double valorAPagar, TarjetaDeCredito tarjetaDeCredito, String nombreClasePasarela)
+            throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+            NoSuchMethodException, SecurityException, ClassNotFoundException {
+        return enrutadorPrincipal.hacerPago(valorAPagar, tarjetaDeCredito, nombreClasePasarela);
+    }
+
     public void salirPrograma() {
         enrutadorPrincipal.salirPrograma();
     }
 
+    public ArrayList<String> cantBotones() 
+    {
+        ArrayList<String> Cantbotones = ControladorBaseDatos.cantBotones();
+        return Cantbotones;
+    }
+    public TarjetaDeCredito crearTarjetaDeCredito(String numeroTarjeta, String nombreTitular, String cvv)
+    {
+        TarjetaDeCredito tarjeta = new TarjetaDeCredito(getTitle(), getWarningString(), getName());
+        return tarjeta;
+    }
+    public Double valorapagar()
+    {
+        Double total = checkOut.getTotal();
+        return total;
+    }
+    public String direccion()
+    {
+        String direccion = opcionesPago.getDireccion();
+        return direccion;
+    }
 }

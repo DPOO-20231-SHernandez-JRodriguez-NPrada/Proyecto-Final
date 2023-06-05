@@ -1,5 +1,6 @@
 package Aplicacion;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,6 +8,9 @@ import Aplicacion.Habitaciones.AdministradorHabitaciones;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Huespedes.AdministradorHuespedes;
 import Aplicacion.Huespedes.Huesped;
+import Aplicacion.PasarelasDePagos.AdministradorPagos;
+import Aplicacion.PasarelasDePagos.PasarelaDePagos;
+import Aplicacion.PasarelasDePagos.TarjetaDeCredito;
 import Aplicacion.Reservas.AdministradorReservas;
 import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.AdministradorServicios;
@@ -31,6 +35,7 @@ public class EnrutadorPrincipal {
     private AdministradorHuespedes adminHuespedes;
     private AdministradorServicios adminServicios;
     private AdministradorHabitaciones adminHabitaciones;
+    private AdministradorPagos adminPago;
     private ChekInOut checkInOut;
 
     public EnrutadorPrincipal() {
@@ -142,10 +147,9 @@ public class EnrutadorPrincipal {
             adminHuespedes.AñadirServicio(documento, servicio, descripcion, fecha, pagado, precio);
         }
     }
-    
-    public double precioProducto(String nombre, String cantidad)
-    {
-        double precio = adminServicios.precioProducto(nombre,cantidad);
+
+    public double precioProducto(String nombre, String cantidad) {
+        double precio = adminServicios.precioProducto(nombre, cantidad);
         return precio;
     }
 
@@ -206,7 +210,20 @@ public class EnrutadorPrincipal {
         controladorBD.GuardarPrograma();
     }
 
-    public Reserva ConseguirReserva(String documento){
+    public Reserva ConseguirReserva(String documento) {
         return adminReservas.getReserva(documento);
     }
+
+    public Boolean hacerPago(Double valorAPagar, TarjetaDeCredito tarjetaDeCredito, String nombreClasePasarela)
+            throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+            NoSuchMethodException, SecurityException, ClassNotFoundException {
+        this.adminPago = new AdministradorPagos(nombreClasePasarela);
+        return adminPago.procesarPago(tarjetaDeCredito, valorAPagar);
+    }
+
+    public TarjetaDeCredito crearTarjeta(String numeroTarjeta, String nombreTitular, String cvv) {
+        TarjetaDeCredito tarjeta = new TarjetaDeCredito(numeroTarjeta, nombreTitular, cvv);
+        return tarjeta;
+    }
+
 }
