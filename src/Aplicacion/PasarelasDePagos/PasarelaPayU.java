@@ -1,8 +1,14 @@
 package Aplicacion.PasarelasDePagos;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Date;
+
 public class PasarelaPayU implements PasarelaDePagos {
 
     private String nombrePasarela;
+    private BufferedWriter bw = null;
 
     PasarelaPayU() {
         this.nombrePasarela = "PayU";
@@ -37,5 +43,31 @@ public class PasarelaPayU implements PasarelaDePagos {
     @Override
     public Boolean validarReportada(TarjetaDeCredito tarjetaDeCredito) {
         return !tarjetaDeCredito.isReportada();
+    }
+
+    @Override
+    public void registrarTransaccion(TarjetaDeCredito tarjetaDeCredito, Double monto, Boolean transaccionCompletada) {
+        // Registrar la transacción en un archivo txt
+        // Se registra la fecha, el monto y el número de la tarjeta
+
+        try {
+            bw = new BufferedWriter(new FileWriter("Data/Pagos/LogPayU.csv", true));
+            String estado = transaccionCompletada ? "completada" : "fallida";
+            bw.write(new Date(System.currentTimeMillis()) + "," + estado + ","
+                    + tarjetaDeCredito.getNumeroTarjeta() + "," + monto + "COP");
+            bw.newLine();
+            bw.flush();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } finally
+
+        {
+            if (bw != null)
+                try {
+                    bw.close();
+                } catch (IOException ioe2) {
+
+                }
+        }
     }
 }
