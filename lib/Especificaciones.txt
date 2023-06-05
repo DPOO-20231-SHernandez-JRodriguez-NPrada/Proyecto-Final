@@ -1,1 +1,0 @@
-Estas son las librerias utilizadas en el proyecto:
