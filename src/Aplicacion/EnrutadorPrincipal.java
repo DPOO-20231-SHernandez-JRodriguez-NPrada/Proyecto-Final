@@ -1,5 +1,6 @@
 package Aplicacion;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,6 +33,7 @@ public class EnrutadorPrincipal {
     private AdministradorServicios adminServicios;
     private AdministradorHabitaciones adminHabitaciones;
     private ChekInOut checkInOut;
+    private CaracteristicasHotel caracteristicasHotel;
 
     public EnrutadorPrincipal() {
         this.controladorBD = new ControladorBaseDatos();
@@ -64,11 +66,13 @@ public class EnrutadorPrincipal {
         CargarDatosTarifas();
         CargarDatosMenu();
         CargarDatosFacturas();
+        CargarCaracteristicasHotel();
     }
 
     private void CargarDatosLogin() {
         HashMap<String, String> datosLogin = controladorBD.ConseguirDatosLogin();
-        adminLogin.AsignarDatos(datosLogin);
+        HashMap<String, String> datosLoginClientes = controladorBD.ConseguirDatosLoginClientes();
+        adminLogin.AsignarDatos(datosLogin, datosLoginClientes);
     }
 
     private void CargarDatosReservas() {
@@ -104,6 +108,14 @@ public class EnrutadorPrincipal {
     private void CargarDatosFacturas() {
         HashMap<String, ArrayList<Factura>> datosFacturas = controladorBD.ConseguirDatosFacturas();
         adminFacturas.AsignarFacturas(datosFacturas);
+    }
+
+    private void CargarCaracteristicasHotel(){
+        try {
+            caracteristicasHotel = controladorBD.CargarCaracteristicasHotel();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public String ComprobarLogin(String usuario, String contrasenia) {
@@ -156,10 +168,6 @@ public class EnrutadorPrincipal {
         checkInOut.CheckIn(reserva, huesped);
     }
 
-    public void HacerCheckout() {
-
-    }
-
     public ArrayList<HabitacionBase> buscarHabitaciones(Boolean cocina, Boolean balcon, Boolean vista, String fechai,
             String fechaf, String tipo) {
         ArrayList<HabitacionBase> HabitacionesBs = adminHabitaciones.buscarHabitaciones(cocina, balcon, vista, fechai,
@@ -209,4 +217,21 @@ public class EnrutadorPrincipal {
     public Reserva ConseguirReserva(String documento){
         return adminReservas.getReserva(documento);
     }
+
+    public boolean ComprobarLoginUsuario(String usuario, String contrasenia) {
+        return adminLogin.ComprobarLoginCliente(usuario, contrasenia);
+    }
+
+    public boolean CrearUsuario(String usuario, String contrasenia) {
+        return adminLogin.CrearCuentaCliente(usuario, contrasenia);
+    }
+
+    public CaracteristicasHotel getCaracteristicasHotel() {
+        return caracteristicasHotel;
+    }
+
+    public HabitacionBase BuscarHabitacionBase(String idHabitacion) {
+        return adminHabitaciones.BuscarHabitacionBase(idHabitacion);
+    }
+
 }

@@ -1,10 +1,12 @@
 package BaseDatos;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Aplicacion.CaracteristicasHotel;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Huespedes.Huesped;
 import Aplicacion.Reservas.Reserva;
@@ -22,6 +24,7 @@ public class ControladorBaseDatos {
     private HashMap<String,Huesped> datosHuespedes;
     private ArrayList<Tarifa> datosTarifas;
     private HashMap<String, ArrayList<Factura>> datosFacturas;
+    private HashMap<String, String> datosLoginClientes;
 
     public ControladorBaseDatos() {
         this.traductor = new TraductorFile();
@@ -32,16 +35,32 @@ public class ControladorBaseDatos {
     private void CargarDatosVariables() {
         try {
             CargarDatosReservasYHuespedes();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
             CargarDatosTarifas();
-            CargarDatosFacturas();
         } catch (Exception e) {
             e.printStackTrace();
         }
         
+        try {
+            CargarDatosFacturas();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            CargarDatosLoginClientes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private HashMap<String, String> CargarDatosLogin() throws IOException{
-        File datosLoginFile = new File("Entrega 2/Data/Usuarios.csv");
+        File datosLoginFile = new File("Data/Usuarios.csv");
         if (datosLoginFile.exists()) {
             return traductor.TraducirDatosLoginFile(datosLoginFile);
         }
@@ -50,11 +69,21 @@ public class ControladorBaseDatos {
         }
     }
 
+    private void CargarDatosLoginClientes() throws IOException{
+        File datosLoginFile = new File("Data/Clientes.csv");
+        if (datosLoginFile.exists()) {
+            this.datosLoginClientes = traductor.TraducirDatosLoginFile(datosLoginFile);
+        }
+        else{
+            this.datosLoginClientes = null;
+        }
+    }
+
     private void CargarDatosReservasYHuespedes() throws IOException{
         
-        File datosServiciosHabitacionesFolder = new File("Entrega 2/Data/Reservas/HabitacionesReservaServicios");
-        File datosServiciosHuespedesFolder = new File("Entrega 2/Data/Reservas/HuespedesServicios");
-        File datosReservasYHuespedesFile = new File("Entrega 2/Data/Reservas/Reservas.csv");
+        File datosServiciosHabitacionesFolder = new File("Data/Reservas/HabitacionesReservaServicios");
+        File datosServiciosHuespedesFolder = new File("Data/Reservas/HuespedesServicios");
+        File datosReservasYHuespedesFile = new File("Data/Reservas/Reservas.csv");
         
         traductor.TraducirReservasYHuespedes(datosServiciosHabitacionesFolder, datosServiciosHuespedesFolder, datosReservasYHuespedesFile);
 
@@ -63,7 +92,7 @@ public class ControladorBaseDatos {
     }
 
     private ArrayList<ServicioBase> CargarServiciosBase() throws IOException {
-        File serviciosBaseFile = new File("Entrega 2/Data/ServiciosBase.csv");
+        File serviciosBaseFile = new File("Data/ServiciosBase.csv");
         if (serviciosBaseFile.exists()) {
             return traductor.TraducirServiciosBaseFile(serviciosBaseFile);
         }
@@ -73,8 +102,8 @@ public class ControladorBaseDatos {
     }
 
     private HashMap<String, HabitacionBase> CargarHabitacionesBase() throws IOException {
-        File habitacionesBaseFile = new File("Entrega 2/Data/HabitacionesBase.csv");
-        File ocupacionHabitacionesFile = new File("Entrega 2/Data/OcupacionHabitaciones.csv");
+        File habitacionesBaseFile = new File("Data/HabitacionesBase.csv");
+        File ocupacionHabitacionesFile = new File("Data/OcupacionHabitaciones.csv");
         if (habitacionesBaseFile.exists()) {
             return traductor.TraducirHabitacionesBaseFile(habitacionesBaseFile, ocupacionHabitacionesFile);
         }
@@ -85,13 +114,13 @@ public class ControladorBaseDatos {
 
     private void CargarDatosTarifas() {
         
-        File datosTarifasFolder = new File("Entrega 2/Data/Tarifas");
+        File datosTarifasFolder = new File("Data/Tarifas");
         
         this.datosTarifas = traductor.TraducirTarifas(datosTarifasFolder);
     }
 
     private ArrayList<Producto> CargarMenu() throws IOException{
-        File menuFile = new File("Entrega 2/Data/Menu.csv");
+        File menuFile = new File("Data/Menu.csv");
         if (menuFile.exists()) {
             return traductor.TraducirMenuFile(menuFile);
         }
@@ -101,9 +130,15 @@ public class ControladorBaseDatos {
     }
 
     private void CargarDatosFacturas() throws IOException{
-        File datosFacturasFolder = new File("Entrega 2/Data/Facturas");
+        File datosFacturasFolder = new File("Data/Facturas");
 
         this.datosFacturas = traductor.TraducirFacturas(datosFacturasFolder);
+    }
+
+    public CaracteristicasHotel CargarCaracteristicasHotel() throws FileNotFoundException {
+        File caracteristicasHotelFile = new File("Data/EspecificacionesHotel.csv");
+        
+        return traductor.TraducirCaracteristicasHotelFile(caracteristicasHotelFile);
     }
 
     //Metodos Getters
@@ -115,6 +150,10 @@ public class ControladorBaseDatos {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public HashMap<String, String> ConseguirDatosLoginClientes() {
+        return this.datosLoginClientes;
     }
 
     public HashMap<String, Reserva> ConseguirDatosReservas() {
@@ -129,7 +168,6 @@ public class ControladorBaseDatos {
             return null;
         }
 
-        
     }
     
     public HashMap<String, HabitacionBase> ConseguirHabitacionesBase() {
@@ -167,5 +205,7 @@ public class ControladorBaseDatos {
         traductorObject.GuardarReservasHuespedesServicios(datosReservas);
         traductorObject.GuardarTarifas(datosTarifas);
         traductorObject.GuardarFacturas(datosFacturas);
+        traductorObject.GuardarDatosLoginClientes(datosLoginClientes);
     }
+
 }

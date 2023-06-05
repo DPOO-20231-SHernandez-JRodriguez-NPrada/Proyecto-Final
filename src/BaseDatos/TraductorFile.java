@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import Aplicacion.CaracteristicasHotel;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Habitaciones.HabitacionReserva;
 import Aplicacion.Huespedes.Huesped;
@@ -112,6 +113,20 @@ public class TraductorFile {
                 boolean cocina = Boolean.parseBoolean(datos[7]);
                 String capacidadCamasString = datos[8]; 
                 int anio = Integer.parseInt(datos[9]);
+                int metros = Integer.parseInt(datos[10]);
+                boolean aireAcondicionado = Boolean.parseBoolean(datos[11]);
+                boolean calefaccion = Boolean.parseBoolean(datos[12]);
+                int tamanioCama = Integer.parseInt(datos[13]);
+                boolean tv = Boolean.parseBoolean(datos[14]);
+                boolean cafetera = Boolean.parseBoolean(datos[15]);
+                boolean RopaDeCama = Boolean.parseBoolean(datos[16]);
+                boolean plancha = Boolean.parseBoolean(datos[17]);
+                boolean secador = Boolean.parseBoolean(datos[18]);
+                boolean voltaje = Boolean.parseBoolean(datos[19]);
+                boolean usb = Boolean.parseBoolean(datos[20]);
+                boolean usbc = Boolean.parseBoolean(datos[21]);
+                boolean desayuno = Boolean.parseBoolean(datos[22]);
+
                 Boolean[] diasOcupado = ocupacionHabitaciones.get(id+anio);
                 
                 ArrayList<Integer> camas = new ArrayList<Integer>();
@@ -120,7 +135,9 @@ public class TraductorFile {
                     camas.add(Integer.parseInt(Character.toString(capacidadCamasString.charAt(i))));
                 }
 
-                HabitacionBase habitacion = new HabitacionBase(ubicacion, capacidad, capacidadMax, id, tipo, diasOcupado, balcon, vista, cocina, camas, anio);
+                HabitacionBase habitacion = new HabitacionBase(ubicacion, capacidad, capacidadMax, id, tipo, diasOcupado, balcon, vista, cocina, camas, anio, metros, aireAcondicionado, calefaccion, tamanioCama, tv, cafetera, RopaDeCama, plancha, secador, voltaje, usb, usbc, desayuno);
+
+                //HabitacionBase habitacion = new HabitacionBase(ubicacion, capacidad, capacidadMax, id, tipo, diasOcupado, balcon, vista, cocina, camas, anio);
 
                 habitacionesBase.put(id, habitacion);
                 
@@ -406,6 +423,18 @@ public class TraductorFile {
         }
 
         return nuevoMapaFacturas;
+    }
+
+    public CaracteristicasHotel TraducirCaracteristicasHotelFile(File caracteristicasHotelFile) throws FileNotFoundException {
+        Scanner scannerLectura = new Scanner(caracteristicasHotelFile);
+        scannerLectura.nextLine();
+
+        String[] datos = scannerLectura.nextLine().split(",");
+
+        scannerLectura.close();
+
+        return new CaracteristicasHotel(Boolean.parseBoolean(datos[0]), Boolean.parseBoolean(datos[1]), Boolean.parseBoolean(datos[2]), Boolean.parseBoolean(datos[3]), Boolean.parseBoolean(datos[4]), Boolean.parseBoolean(datos[5]), Boolean.parseBoolean(datos[6]));
+    
     }
     
 }

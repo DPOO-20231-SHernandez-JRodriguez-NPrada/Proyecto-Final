@@ -5,7 +5,9 @@ import java.util.HashMap;
 
 import javax.swing.JFrame;
 
+import Aplicacion.CaracteristicasHotel;
 import Aplicacion.EnrutadorPrincipal;
+import Aplicacion.Habitaciones.AdministradorHabitaciones;
 import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.Servicio;
@@ -282,6 +284,14 @@ public class InterfazPrincipalJFrame extends JFrame {
 
     public void salirPrograma() {
         enrutadorPrincipal.salirPrograma();
+    }
+
+    public CaracteristicasHotel darCaracteristicasHotel() {
+        return enrutadorPrincipal.getCaracteristicasHotel();
+    }
+
+    public HabitacionBase BuscarHabitacionBase(String idHabitacion) {
+        return enrutadorPrincipal.BuscarHabitacionBase(idHabitacion);
     }
 
 }
