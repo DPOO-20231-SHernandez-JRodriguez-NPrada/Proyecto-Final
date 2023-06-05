@@ -12,5 +12,5 @@ Luego se abrirá una consola con las diferentes opciones. Cada una dirigirá a u
 
 En los espacios donde se piden fechas es necesario usar ese formato para que se convierta correctamente en un objeto LocalDate. 
 
-El documento y el diagrama estan el la carpeta docs de entrega 2
+Los reportes se generan al dar click al boton "Generar reportes" (solo esta disponible en la consola de administrador). Se generan en la carpeta "Reportes"
 
