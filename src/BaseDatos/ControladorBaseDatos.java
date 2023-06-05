@@ -163,4 +163,19 @@ public class ControladorBaseDatos {
         traductorObject.GuardarTarifas(datosTarifas);
         traductorObject.GuardarFacturas(datosFacturas);
     }
+
+    public static ArrayList<String> cantBotones() 
+    {
+        ArrayList<String> cantBotones = new ArrayList<String>();
+    try{
+        File metodosPago = new File("Data/Pagos/ConfigPagos.csv");
+        cantBotones = TraductorFile.cantBotones(metodosPago);
+    }
+    
+    catch (Exception e) 
+    {
+        e.printStackTrace();
+    }
+    return cantBotones;
+    }
 }
