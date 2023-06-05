@@ -221,4 +221,9 @@ public class EnrutadorPrincipal {
         return adminPago.procesarPago(tarjetaDeCredito, valorAPagar);
     }
 
+    public TarjetaDeCredito crearTarjeta(String numeroTarjeta, String nombreTitular, String cvv) {
+        TarjetaDeCredito tarjeta = new TarjetaDeCredito(numeroTarjeta, nombreTitular, cvv);
+        return tarjeta;
+    }
+
 }

@@ -11,6 +11,7 @@ import Aplicacion.Habitaciones.HabitacionBase;
 import Aplicacion.PasarelasDePagos.TarjetaDeCredito;
 import Aplicacion.Reservas.Reserva;
 import Aplicacion.Servicios.Servicio;
+import BaseDatos.ControladorBaseDatos;
 import Interfaz.InterfazAplicacionHotel.ServiciosGUI.Interfazservicios;
 import Interfaz.InterfazAplicacionHotel.TarifasGUI.Interfaztarifas;
 
@@ -39,8 +40,9 @@ public class InterfazPrincipalJFrame extends JFrame {
     private EnrutadorPrincipal enrutadorPrincipal;
 
     public InterfazPrincipalJFrame() {
-        this.enrutadorPrincipal = new EnrutadorPrincipal();
 
+
+        this.enrutadorPrincipal = new EnrutadorPrincipal();
         this.informacionReservas = new InfromacionReservas(this);
         this.crearReserva = new CrearReserva(this);
         this.checkIn = new CheckInInterfaz(this);
@@ -307,4 +309,24 @@ public class InterfazPrincipalJFrame extends JFrame {
         enrutadorPrincipal.salirPrograma();
     }
 
+    public ArrayList<String> cantBotones() 
+    {
+        ArrayList<String> Cantbotones = ControladorBaseDatos.cantBotones();
+        return Cantbotones;
+    }
+    public TarjetaDeCredito crearTarjetaDeCredito(String numeroTarjeta, String nombreTitular, String cvv)
+    {
+        TarjetaDeCredito tarjeta = new TarjetaDeCredito(getTitle(), getWarningString(), getName());
+        return tarjeta;
+    }
+    public Double valorapagar()
+    {
+        Double total = checkOut.getTotal();
+        return total;
+    }
+    public String direccion()
+    {
+        String direccion = opcionesPago.getDireccion();
+        return direccion;
+    }
 }

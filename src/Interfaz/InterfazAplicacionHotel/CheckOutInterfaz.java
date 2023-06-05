@@ -269,4 +269,8 @@ public class CheckOutInterfaz extends JPanel implements ActionListener {
         }
     }
 
+    public Double getTotal() {
+        return total;
+    }
+    
 }

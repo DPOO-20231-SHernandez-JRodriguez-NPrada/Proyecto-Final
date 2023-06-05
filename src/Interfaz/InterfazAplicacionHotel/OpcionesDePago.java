@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,10 +14,12 @@ import javax.swing.JPanel;
 public class OpcionesDePago extends JPanel implements ActionListener {
 
     private JPanel Paneldebotones, Salida;
-    private JButton BotonPSE, BotonPayu, BotonSalir;
-    private ImageIcon PSE, PAYU;
+    private JButton BotonPago, BotonSalir;
+    //private ImageIcon PSE, PAYU;
     private JLabel opciones;
     private InterfazPrincipalJFrame interfazpadre;
+    private ArrayList<String> cantBotones;
+    private String direccion = "";
 
     public OpcionesDePago(InterfazPrincipalJFrame interfazPrincipalJFrame) 
     {
@@ -25,7 +28,10 @@ public class OpcionesDePago extends JPanel implements ActionListener {
         opciones = new JLabel("Seleccione alguno de los metodos de pago");
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(opciones,BorderLayout.CENTER);
-        this.Paneldebotones = creaPanelbotones();
+
+        cantBotones = interfazpadre.cantBotones();
+
+        this.Paneldebotones = creaPanelbotones(cantBotones);
         this.Salida = salidaPanel();
 
         add(Salida,BorderLayout.SOUTH);
@@ -43,53 +49,59 @@ public class OpcionesDePago extends JPanel implements ActionListener {
 
         BotonSalir = new JButton("Salir");
         BotonSalir.addActionListener(this);
+        BotonPago.setPreferredSize(new Dimension(200, 45));
         BotonSalir.setMaximumSize(new Dimension(300, 45));
         BotonSalir.setActionCommand("SALIR");
         Salida.add(BotonSalir);
         return Salida;
     }
 
-    private JPanel creaPanelbotones() 
+    private JPanel creaPanelbotones(ArrayList<String> cantBotones) 
     {
-
+        
         Paneldebotones = new JPanel();
-        PSE = new ImageIcon("Data/Iconos/logo-pse.png");
-        PAYU = new ImageIcon("Data/Iconos/PAYU_LOGO_LIME.png");
+        //PSE = new ImageIcon("Data/Iconos/logo-pse.png");
+        //PAYU = new ImageIcon("Data/Iconos/PAYU_LOGO_LIME.png");
 
-        BotonPSE = new JButton();
-        BotonPSE.addActionListener(this);
-        BotonPSE.setMaximumSize(new Dimension(300, 45));
-        BotonPSE.setIcon(new ImageIcon(PSE.getImage().getScaledInstance(300,70, java.awt.Image.SCALE_SMOOTH)));
-        BotonPSE.setActionCommand("PSE");
+        for(int i = 0; i < cantBotones.size(); i++)
+        {   
+            String direccion = cantBotones.get(i);
+            String[] nombreTemp = direccion.split("\\.");
+            String nombre = nombreTemp[nombreTemp.length-1].replace("Pasarela", "");
+            
+            BotonPago = new JButton(nombre);
+            BotonPago.addActionListener(this);
+            BotonPago.setPreferredSize(new Dimension(200, 45));
+            BotonPago.setMaximumSize(new Dimension(300, 45));
+            //BotonPSE.setIcon(new ImageIcon(PSE.getImage().getScaledInstance(300,70, java.awt.Image.SCALE_SMOOTH)));
+            BotonPago.setActionCommand(direccion);
+            Paneldebotones.add(BotonPago);
 
-        BotonPayu = new JButton();
-        BotonPayu.addActionListener(this);
-        BotonPayu.setMaximumSize(new Dimension(300, 45));
-        BotonPayu.setIcon(new ImageIcon(PAYU.getImage().getScaledInstance(300,70, java.awt.Image.SCALE_SMOOTH)));
-        BotonPayu.setActionCommand("PAYU");
-
-        Paneldebotones.add(BotonPSE);
-        Paneldebotones.add(BotonPayu);
+        }
+        
 
         return Paneldebotones;
     }
 
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) 
+    {
         String grito = e.getActionCommand();
 
-        if(grito.equals("PSE"))
-        {
-            interfazpadre.IrAlPanelPago();
-        }
-        else if(grito.equals("PAYU"))
-        {
-            interfazpadre.IrAlPanelPago();
-        }
-        else if(grito.equals("SALIR"))
+        if(grito.equals("SALIR"))
         {
             interfazpadre.IrAPanelCheckOut();
+        }
+        else
+        {
+            direccion = grito;
+            interfazpadre.IrAlPanelPago();
         }
     }
 
